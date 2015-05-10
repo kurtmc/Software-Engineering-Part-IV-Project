@@ -45,8 +45,8 @@ inspection of student submissions as well as detecting plagiarised work that the
 student has attempted to conceal.
 
 % Background: (contains technical aspects)
-% - what is eclipse
-% - mention some of the plaigirism tools that exist, mention how the only analyse end result
+% * what is eclipse
+% * mention some of the plaigirism tools that exist, mention how the only analyse end result
 % - ACP (some plugin) exists but it lacks features
 \section{Background}
 Eclipse is an IDE (integrated development environment) that is written is Java.
@@ -61,12 +61,24 @@ students to help identify any similarities between students. If the student
 submissions are too similar these tools could detect that and warn the lecturer
 that plagiarism is the likely cause of this similarity.
 
+A tool called ACP (Active Classroom Programmer)\cite{giacaman2015active} is used
+at the University of Auckland in some SOFTENG 701 and 751. ACP is an eclipse
+plugin that allows the lecturer to create eclipse workspaces and upload
+snapshots of the current state to a webserver. For example during a lecture a
+task can be completed in parts and once each part is complete a snapshot of the
+code can be uploaded. The students, during the lecture can download these
+snapshots using the ACP eclipse plugin, onto thier laptops and make
+modifications and experiment with the workspace, they can also attempt to
+complete the next part before the lecturer has completed it. Often there are
+short breaks during the lecture that allow students to attempt the tasks.
+
 % Active Test Programmer:
 % - no implementation details
 % - features
 % - plaigirism module
 % - teacher visualisation tool
 \section{Active Test Programmer}
+%Active Test Programmer is an extention to ACP
 
 % Interim Report:
 % - technologies considered, pros/cons (why eclipse for instance)
