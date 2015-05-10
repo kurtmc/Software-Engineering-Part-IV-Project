@@ -72,21 +72,36 @@ modifications and experiment with the workspace, they can also attempt to
 complete the next part before the lecturer has completed it. Often there are
 short breaks during the lecture that allow students to attempt the tasks.
 
+Active Test Programmer (ATP) is an extention to ACP which allows the lecturer to
+setup a programming test. The programming test can be distributed to students
+before the test starts. The test is encrypted so a secret code is needed to
+decrypt the tests. When a secret code is distributed to the students they may
+type it in and begin the test. After a predetermined amount of time the the test
+is over and the students must submit their code through the eclipse plugin.
+
 % Active Test Programmer:
 % - no implementation details
 % - features
 % - plaigirism module
 % - teacher visualisation tool
 \section{Active Test Programmer}
-%Active Test Programmer is an extention to ACP
+For my project, we are going to extend ATP to give lecturers confidence that
+plaigirism that has occured during the test can be detected automatically. The
+way this will be done is the history of the student completing the test will be
+recorded and when the test is submitted the history will go with it. This
+history gives us much richer insight into the characteristics of the students
+work. Analysis of the history of the students submission will allow for more
+robust detection of potential plaigirism.
 
 % Interim Report:
 % - technologies considered, pros/cons (why eclipse for instance)
 % - related work (research)
 \section{Technologies Considered and Related Work}
+% libgit2, eclipse because ACP already developed, research???
 
 % Implementation:
 \section{Implementation}
+% libgit2, eclipse text listener, prototype
 
 % Evaluation:
 % - students
@@ -96,7 +111,8 @@ short breaks during the lecture that allow students to attempt the tasks.
 
 % Conclusions
 \section{Conclusions}
-Some conclusion.
+% Some conclusion. Solution can be used in a more general sense, not just
+% related to plaigirism
 
 % References
 \bibliographystyle{IEEEtran}
