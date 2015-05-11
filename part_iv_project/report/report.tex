@@ -4,6 +4,7 @@
 % title and originality statement are not counted
 \documentclass[twocolumn]{article}
 \usepackage{datetime}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -43,6 +44,7 @@ giving students these tools we would also like to give the teaching staff
 confidence that plagiarism can be detected automatically without tedious manual
 inspection of student submissions as well as detecting plagiarised work that the
 student has attempted to conceal.
+% TODO overview of report
 
 % Background: (contains technical aspects)
 % * what is eclipse
@@ -93,11 +95,48 @@ history gives us much richer insight into the characteristics of the students
 work. Analysis of the history of the students submission will allow for more
 robust detection of potential plaigirism.
 
+\subsection{Features} \label{sec:Features}
+Create tests: The lecturer will be able to create a programming test in their
+IDE and upload it. Once the test is uploaded the lecturer will be given a secret
+code that can be used to begin the test.
+
+Download tests: Students will be able to download tests from within their IDE,
+they may not begin the test until they have entered the secret code to decrypt
+the test. This allows all the students to download and be ready for the test, so
+that everyone may begin at the same time, and no students will feel
+disadvantaged because it took them longer to download the test, or if wifi is
+unavailable the test may be distributed on a USB flash drive.
+
+Upload completed test: Students may upload their completed test through their
+IDE. If WiFi is unavailable they may export their completed test to an archived
+file and copy it to a flash drive to give to the lecturer. The archived
+completed test will contain information about when it was exported so that we
+can be sure they completed the test in the given time.
+
+Implementation history: The completed test that the student uploads, will
+contain a complete history in snapshots over time of how the test was
+implemented. This gives a rich insight into potential plaigirism in the history
+of the code.
+
+Viewing reports: Reports can be generated that contain analyses of student
+tests. In the analyses it will contain a score of how likely it was that the
+students submission contains plaigirised work. The history also gives us the
+opportunity to go beyond just checking for plaigirism. In fact a more general
+analysis could give us information about where the student may have been
+struggling during the test by looking at how long it took a student took to
+implement a particular method or class.
+
 % Interim Report:
 % - technologies considered, pros/cons (why eclipse for instance)
 % - related work (research)
 \section{Technologies Considered and Related Work}
 % libgit2, eclipse because ACP already developed, research???
+For this project the client appliction will be implemented using the Eclipse
+plugin framework. There are other IDE's that could potentially be used because
+it also have a plugin architecture but Eclips was choosen because ACP is already
+implemented for Eclipse and it's going to be extended to contain the features
+outlined in \nameref{sec:Features}.
+
 
 % Implementation:
 \section{Implementation}
