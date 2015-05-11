@@ -66,15 +66,15 @@ that plagiarism is the likely cause of this similarity.
 A tool called ACP (Active Classroom Programmer)\cite{giacaman2015active} is used
 at the University of Auckland in some SOFTENG 701 and 751. ACP is an eclipse
 plugin that allows the lecturer to create eclipse workspaces and upload
-snapshots of the current state to a webserver. For example during a lecture a
+snapshots of the current state to a web server. For example during a lecture a
 task can be completed in parts and once each part is complete a snapshot of the
 code can be uploaded. The students, during the lecture can download these
-snapshots using the ACP eclipse plugin, onto thier laptops and make
+snapshots using the ACP eclipse plugin, onto their laptops and make
 modifications and experiment with the workspace, they can also attempt to
 complete the next part before the lecturer has completed it. Often there are
 short breaks during the lecture that allow students to attempt the tasks.
 
-Active Test Programmer (ATP) is an extention to ACP which allows the lecturer to
+Active Test Programmer (ATP) is an extension to ACP which allows the lecturer to
 setup a programming test. The programming test can be distributed to students
 before the test starts. The test is encrypted so a secret code is needed to
 decrypt the tests. When a secret code is distributed to the students they may
@@ -88,12 +88,12 @@ is over and the students must submit their code through the eclipse plugin.
 % - teacher visualisation tool
 \section{Active Test Programmer}
 For my project, we are going to extend ATP to give lecturers confidence that
-plaigirism that has occured during the test can be detected automatically. The
+plagiarism that has occurred during the test can be detected automatically. The
 way this will be done is the history of the student completing the test will be
 recorded and when the test is submitted the history will go with it. This
 history gives us much richer insight into the characteristics of the students
 work. Analysis of the history of the students submission will allow for more
-robust detection of potential plaigirism.
+robust detection of potential plagiarism.
 
 \subsection{Features} \label{sec:Features}
 Create tests: The lecturer will be able to create a programming test in their
@@ -104,7 +104,7 @@ Download tests: Students will be able to download tests from within their IDE,
 they may not begin the test until they have entered the secret code to decrypt
 the test. This allows all the students to download and be ready for the test, so
 that everyone may begin at the same time, and no students will feel
-disadvantaged because it took them longer to download the test, or if wifi is
+disadvantaged because it took them longer to download the test, or if WiFi is
 unavailable the test may be distributed on a USB flash drive.
 
 Upload completed test: Students may upload their completed test through their
@@ -115,28 +115,28 @@ can be sure they completed the test in the given time.
 
 Implementation history: The completed test that the student uploads, will
 contain a complete history in snapshots over time of how the test was
-implemented. This gives a rich insight into potential plaigirism in the history
+implemented. This gives a rich insight into potential plagiarism in the history
 of the code.
 
 Viewing reports: Reports can be generated that contain analyses of student
 tests. In the analyses it will contain a score of how likely it was that the
-students submission contains plaigirised work. The history also gives us the
-opportunity to go beyond just checking for plaigirism.
+students submission contains plagiarised work. The history also gives us the
+opportunity to go beyond just checking for plagiarism.
 % Interim Report:
 % - technologies considered, pros/cons (why eclipse for instance)
 % - related work (research)
 \section{Technologies Considered}
 % libgit2, eclipse because ACP already developed, research???
-For this project the client appliction will be implemented using the Eclipse
+For this project the client application will be implemented using the Eclipse
 plugin framework. There are other IDE's that could potentially be used because
-it also have a plugin architecture for example IntelliJ but Eclipse was choosen
+it also have a plugin architecture for example IntelliJ but Eclipse was chosen
 because ACP is already implemented for Eclipse and it's going to be extended to
 contain the features outlined in \nameref{sec:Features}.
 
 For recording the history of the changes to files in the students test, libgit2
 will be used. libgit2 can be used to store the history of a file in a series of
 commits. The reason libgit2 will be used is that is has a permissive license so
-it can be integrated into this project without license concerns. Reimplementing
+it can be integrated into this project without license concerns. Implementing
 a system of storing changes to a file isn't feasible for a small project like
 this so libgit2 is a good fit.
 
@@ -145,10 +145,10 @@ this so libgit2 is a good fit.
 \section{Implementation}
 % libgit2, eclipse text listener, prototype
 So far into the project I have made a small prototype to demonstrate some of the
-functionality. This protype confirms that it is possible to record the history
+functionality. This prototype confirms that it is possible to record the history
 of a students work. I have made a modification to the ACP plugin that attaches a
 listener to the current document the user is editing. The listener receives an
-event for every keystroke in the document. It also recieves events when a paste
+event for every keystroke in the document. It also receives events when a paste
 is done, so it possible to see what is in the clipboard when the user pastes.
 
 % Evaluation:
@@ -156,10 +156,10 @@ is done, so it possible to see what is in the clipboard when the user pastes.
 % - how accurate
 % - performance metrics
 \section{Evaluation}
-To evaluate the effitiveness of the tool, mock tests will be performed with
-volenteers to gather some test data. Some of the volenteers will be asked to
-copy one another and conceal it. These submissions will be used to evalutate the
-accuracy of plaigirism detection. It will also be a good opportunity to get user
+To evaluate the effectiveness of the tool, mock tests will be performed with
+volunteers to gather some test data. Some of the volunteers will be asked to
+copy one another and conceal it. These submissions will be used to evaluated the
+accuracy of plagiarism detection. It will also be a good opportunity to get user
 feedback and find out about potential bugs and problems before the tool is used
 in a more realistic setting.
 
@@ -167,13 +167,13 @@ in a more realistic setting.
 \section{Conclusions}
 % Some conclusion. Solution can be used in a more general sense, not just
 % related to plaigirism
-Many student tests today to not assess students in a pratical manner. The reason
+Many student tests today to not assess students in a practical manner. The reason
 I think that pen and paper tests are popular is because lecturers are concerned
-that pratical tests will give students an easy opportunity to plaigirse work.
+that practical tests will give students an easy opportunity to plagiarise work.
 The goal of Active Test Programmer (ATP) is to remove doubt from lecturers that
-plaigirism will be caught. ATP gives confidence to lecturers that attempts at
-concealing plaigirism will be found in the history of the students work. More
-over plaigirim detection is just one of the benefits of looking into the history
+plagiarism will be caught. ATP gives confidence to lecturers that attempts at
+concealing plagiarism will be found in the history of the students work. More
+over plagiarism detection is just one of the benefits of looking into the history
 of the code. In fact a more general analysis could give us information about
 where the student may have been struggling during the test by looking at how
 long it took a student took to implement a particular method or class. This
