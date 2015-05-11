@@ -121,37 +121,64 @@ of the code.
 Viewing reports: Reports can be generated that contain analyses of student
 tests. In the analyses it will contain a score of how likely it was that the
 students submission contains plaigirised work. The history also gives us the
-opportunity to go beyond just checking for plaigirism. In fact a more general
-analysis could give us information about where the student may have been
-struggling during the test by looking at how long it took a student took to
-implement a particular method or class.
-
+opportunity to go beyond just checking for plaigirism.
 % Interim Report:
 % - technologies considered, pros/cons (why eclipse for instance)
 % - related work (research)
-\section{Technologies Considered and Related Work}
+\section{Technologies Considered}
 % libgit2, eclipse because ACP already developed, research???
 For this project the client appliction will be implemented using the Eclipse
 plugin framework. There are other IDE's that could potentially be used because
-it also have a plugin architecture but Eclips was choosen because ACP is already
-implemented for Eclipse and it's going to be extended to contain the features
-outlined in \nameref{sec:Features}.
+it also have a plugin architecture for example IntelliJ but Eclipse was choosen
+because ACP is already implemented for Eclipse and it's going to be extended to
+contain the features outlined in \nameref{sec:Features}.
+
+For recording the history of the changes to files in the students test, libgit2
+will be used. libgit2 can be used to store the history of a file in a series of
+commits. The reason libgit2 will be used is that is has a permissive license so
+it can be integrated into this project without license concerns. Reimplementing
+a system of storing changes to a file isn't feasible for a small project like
+this so libgit2 is a good fit.
 
 
 % Implementation:
 \section{Implementation}
 % libgit2, eclipse text listener, prototype
+So far into the project I have made a small prototype to demonstrate some of the
+functionality. This protype confirms that it is possible to record the history
+of a students work. I have made a modification to the ACP plugin that attaches a
+listener to the current document the user is editing. The listener receives an
+event for every keystroke in the document. It also recieves events when a paste
+is done, so it possible to see what is in the clipboard when the user pastes.
 
 % Evaluation:
 % - students
 % - how accurate
 % - performance metrics
 \section{Evaluation}
+To evaluate the effitiveness of the tool, mock tests will be performed with
+volenteers to gather some test data. Some of the volenteers will be asked to
+copy one another and conceal it. These submissions will be used to evalutate the
+accuracy of plaigirism detection. It will also be a good opportunity to get user
+feedback and find out about potential bugs and problems before the tool is used
+in a more realistic setting.
 
 % Conclusions
 \section{Conclusions}
 % Some conclusion. Solution can be used in a more general sense, not just
 % related to plaigirism
+Many student tests today to not assess students in a pratical manner. The reason
+I think that pen and paper tests are popular is because lecturers are concerned
+that pratical tests will give students an easy opportunity to plaigirse work.
+The goal of Active Test Programmer (ATP) is to remove doubt from lecturers that
+plaigirism will be caught. ATP gives confidence to lecturers that attempts at
+concealing plaigirism will be found in the history of the students work. More
+over plaigirim detection is just one of the benefits of looking into the history
+of the code. In fact a more general analysis could give us information about
+where the student may have been struggling during the test by looking at how
+long it took a student took to implement a particular method or class. This
+information could be used to guide the lecturer on which topics to focus on in
+class and therefore give students a more effective learning experience.
 
 % References
 \bibliographystyle{IEEEtran}
