@@ -1,8 +1,5 @@
-import git.Commit;
+import analysis.Analysis;
 import git.Repository;
-import git.SourceFile;
-
-import java.util.Date;
 
 public class Main {
 
@@ -22,29 +19,12 @@ public class Main {
 
         Repository repository = new Repository(args[0]);
 
-        Commit first = repository.getCommits().get(0);
-        Commit last = repository.getCommits().get(repository.getCommits().size() - 1);
+        System.out.println("Test started at " + Analysis.getStartDate(repository));
 
-        Date startTime = first.getDate();
-        System.out.println("Test started at " + startTime);
+        System.out.println("Test ended at " + Analysis.getEndDate(repository));
 
-        Date endTime = last.getDate();
-	    System.out.println("Test ended at " + endTime);
+        System.out.println("The test lasted " + Analysis.getTestLength(repository) + " minutes");
 
-        long durationMinutes = (endTime.getTime() - startTime.getTime())/ (1000 * 60);
-	    System.out.println("The test lasted " + durationMinutes + " minutes");
-
-        int startChars = 0;
-        int endChars = 0;
-
-        for (SourceFile s : first.getFiles()) {
-            startChars += s.getContents().length();
-        }
-
-        for (SourceFile s : last.getFiles()) {
-            endChars += s.getContents().length();
-        }
-
-        System.out.println("Characters per minute " + (endChars - startChars)/durationMinutes);
+        System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
     }
 }
