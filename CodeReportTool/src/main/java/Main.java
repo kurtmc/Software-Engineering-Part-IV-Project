@@ -1,5 +1,4 @@
 import git.Commit;
-import git.GitUtils;
 import git.Repository;
 import git.SourceFile;
 
@@ -12,7 +11,7 @@ public class Main {
     }
     /**
      * Handles the command line interface to generating reports based on git repos
-     * @param args
+     * @param args should contain one string of the repo to be analysed
      */
     public static void main(String[] args) {
 
@@ -20,8 +19,6 @@ public class Main {
             print("Not enough arguments. You need to specify the git repo");
 	        System.exit(1);
         }
-
-	    String repo = args[0];
 
         Repository repository = new Repository(args[0]);
 
