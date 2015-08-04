@@ -2,13 +2,9 @@ package git;
 
 import com.google.common.collect.Lists;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by kurt on 4/08/15.
- */
 public class Repository {
 
     private String _path;

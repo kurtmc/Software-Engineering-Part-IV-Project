@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by kurt on 4/08/15.
- */
 public class Commit {
 
     private String _hash;
@@ -25,9 +22,8 @@ public class Commit {
             String dateString = _repository.executeGitCommand("git show " + _hash + " --pretty=format:\"%ad\" --date=iso").split("\n")[0];
 
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.ENGLISH);
-            Date date = format.parse(dateString);
 
-            return date;
+            return format.parse(dateString);
         } catch (Exception e) {
             return null;
         }

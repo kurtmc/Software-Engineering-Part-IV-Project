@@ -5,9 +5,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-/**
- * Created by kurt on 4/08/15.
- */
 public class SourceFile {
 
     String _path;
