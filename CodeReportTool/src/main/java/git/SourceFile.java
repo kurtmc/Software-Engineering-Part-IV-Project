@@ -12,16 +12,23 @@ public class SourceFile {
 
     String _path;
 
+    String _contents;
+
     public SourceFile(String path) {
         _path = path;
+        readContents();
     }
 
     public String getContents() {
+        return _contents;
+    }
+
+    public void readContents() {
         try {
             byte[] encoded = Files.readAllBytes(Paths.get(_path));
-            return new String(encoded, Charset.defaultCharset());
+            _contents = new String(encoded, Charset.defaultCharset());
         } catch (IOException e) {
-            return null;
+            _contents =  null;
         }
     }
 

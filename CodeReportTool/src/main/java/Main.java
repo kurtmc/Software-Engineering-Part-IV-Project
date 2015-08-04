@@ -34,15 +34,20 @@ public class Main {
         Date endTime = last.getDate();
 	    System.out.println("Test ended at " + endTime);
 
-	    System.out.println("The test lasted " + (endTime.getTime() - startTime.getTime())/ (1000 * 60) + " minutes");
+        long durationMinutes = (endTime.getTime() - startTime.getTime())/ (1000 * 60);
+	    System.out.println("The test lasted " + durationMinutes + " minutes");
 
-	    double chars = GitUtils.charsPerMinute(repo);
-	    System.out.println("Characters per minute " + chars);
+        int startChars = 0;
+        int endChars = 0;
 
-        System.out.println(last.getFiles());
+        for (SourceFile s : first.getFiles()) {
+            startChars += s.getContents().length();
+        }
 
         for (SourceFile s : last.getFiles()) {
-            System.out.println("chars: " + s.getContents().length());
+            endChars += s.getContents().length();
         }
+
+        System.out.println("Characters per minute " + (endChars - startChars)/durationMinutes);
     }
 }
