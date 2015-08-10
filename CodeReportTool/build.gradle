@@ -17,10 +17,13 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
+
 jar {
     manifest {
-        attributes 'Main-Class': 'Main',
-            'Implementation-Title': 'Gradle Quickstart',
-            'Implementation-Version': version
+        attributes "Main-Class": "Main"
+    }
+    
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
