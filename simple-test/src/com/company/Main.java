@@ -21,7 +21,10 @@ public class Main {
      * @return the nth number in the fibonacci sequence
      */
     public static int fibonacci(int n) {
-        
+        if (n == 0) {
+            return 0;
+        }
+        if
         return 0;
     }
 
