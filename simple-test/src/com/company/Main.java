@@ -7,6 +7,7 @@ public class Main {
      * @return the factorial of n
      */
     public static int factorial(int n) {
+        
         return 0;
     }
 
