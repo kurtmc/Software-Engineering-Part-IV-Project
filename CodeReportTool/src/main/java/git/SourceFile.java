@@ -1,6 +1,8 @@
 package git;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,7 +22,11 @@ public class SourceFile {
         return _contents;
     }
 
-    public void readContents() {
+    public InputStream getInputStream() {
+        return new ByteArrayInputStream(getContents().getBytes(Charset.defaultCharset()));
+    }
+
+    private void readContents() {
         try {
             byte[] encoded = Files.readAllBytes(Paths.get(_path));
             _contents = new String(encoded, Charset.defaultCharset());
