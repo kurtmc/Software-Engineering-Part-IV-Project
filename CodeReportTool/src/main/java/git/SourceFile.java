@@ -38,4 +38,8 @@ public class SourceFile {
     public String toString() {
         return _path;
     }
+
+    public AbstractSyntaxTree getAST() {
+	    return new AbstractSyntaxTree(this);
+    }
 }

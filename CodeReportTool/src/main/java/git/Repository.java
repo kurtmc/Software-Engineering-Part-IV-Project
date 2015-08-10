@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.javaparser.ast.CompilationUnit;
+
 public class Repository {
 
     private String _path;
@@ -35,5 +37,12 @@ public class Repository {
 
     public String getPath() {
         return _path;
+    }
+
+    public List<CompilationUnit> getAbstractSyntaxTrees() {
+	    for (Commit c : getCommits()) {
+		c.getFiles();
+	    }
+	    return null;
     }
 }

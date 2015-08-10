@@ -5,6 +5,7 @@ import com.github.javaparser.TokenMgrError;
 import com.github.javaparser.ast.CompilationUnit;
 import git.Repository;
 import git.SourceFile;
+import git.AbstractSyntaxTree;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,21 +37,10 @@ public class Main {
         System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
 
         for (SourceFile file : repository.getCommits().get(repository.getCommits().size() - 1).getFiles()) {
-            if (file.toString().matches(".*.java")) {
-                System.out.println(file);
-                CompilationUnit cu = null;
-                InputStream in = file.getInputStream();
-                try {
-                    cu = JavaParser.parse(in);
-                    in.close();
-                } catch (TokenMgrError ignored) {
-
-                } catch (ParseException | IOException e) {
-                    e.printStackTrace();
-                }
-                //System.out.println("" + cu);
-            }
-        }
+		AbstractSyntaxTree ast = file.getAST();
+		if (ast != null)
+			System.out.println(ast);
 
     }
+}
 }
