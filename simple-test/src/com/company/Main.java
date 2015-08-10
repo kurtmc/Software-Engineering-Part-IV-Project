@@ -11,7 +11,7 @@ public class Main {
         for (int i = 1; i <= n; i++) {
             fact = fact * i;
         }
-        return 0;
+        return fact;
     }
 
     /**
