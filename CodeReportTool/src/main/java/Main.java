@@ -6,6 +6,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import git.Repository;
 import git.SourceFile;
 import git.AbstractSyntaxTree;
+import git.Commit;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,11 +37,11 @@ public class Main {
 
         System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
 
-        for (SourceFile file : repository.getCommits().get(repository.getCommits().size() - 1).getFiles()) {
-		AbstractSyntaxTree ast = file.getAST();
-		if (ast != null)
-			System.out.println(ast);
+	for (Commit c : repository.getCommits()) {
+		for (SourceFile f : c.getFiles()) {
+			System.out.println(c.getLineChanges(f.toString()));
+		}
+	}
 
     }
-}
 }

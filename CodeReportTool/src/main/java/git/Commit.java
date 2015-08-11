@@ -47,4 +47,24 @@ public class Commit {
 
         return files;
     }
+
+    public List<String> getLineChanges(String path) {
+	    String result = _repository.executeGitCommand("git blame -l " + path + " | grep ^" + _hash);
+	    String[] lines = result.split("\n");
+	    List<String> changes = new ArrayList<String>();
+	    for (String l : lines) {
+		if (l.length() > 0) {
+			changes.add(l);
+		}
+	    }
+	    String pattern = "([0-9]{1,3})\\)";
+	    Pattern r = Pattern.compile(pattern);
+	    Matcher m = r.matcher("the string");
+	    for (String l : changes) {
+		    l.
+	    if (changes.size() > 0) {
+		    return changes;
+	    }
+	    return null;
+    }
 }
