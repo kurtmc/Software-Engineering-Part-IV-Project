@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Commit {
 
@@ -61,7 +63,7 @@ public class Commit {
 	    Pattern r = Pattern.compile(pattern);
 	    Matcher m = r.matcher("the string");
 	    for (String l : changes) {
-		    l.
+        }
 	    if (changes.size() > 0) {
 		    return changes;
 	    }
