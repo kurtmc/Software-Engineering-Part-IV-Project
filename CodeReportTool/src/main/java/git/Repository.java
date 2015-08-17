@@ -45,4 +45,8 @@ public class Repository {
 	    }
 	    return null;
     }
+
+    public void checkoutMaster() {
+        executeGitCommand("git checkout master");
+    }
 }

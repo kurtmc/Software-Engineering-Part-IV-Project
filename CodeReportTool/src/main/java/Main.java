@@ -1,10 +1,15 @@
 import analysis.Analysis;
+import com.beust.jcommander.JCommander;
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.visitor.LogVisitor;
 import git.AbstractSyntaxTree;
+import git.Commit;
 import git.Repository;
 import git.SourceFile;
 
 public class Main {
+
+    private static Repository repository;
 
     private static void print(Object o) {
         System.out.println(o);
@@ -20,7 +25,39 @@ public class Main {
 	        System.exit(1);
         }
 
-        Repository repository = new Repository(args[0]);
+        repository = new Repository(args[0]);
+
+        repository.checkoutMaster();
+
+        ArgumentParser arguments = new ArgumentParser();
+        new JCommander(arguments, args);
+
+        if (arguments.astlog) {
+            int counter = 0;
+
+            for (Commit c : repository.getCommits()) {
+                for (SourceFile f : c.getFiles()) {
+                    AbstractSyntaxTree ast = f.getAST();
+
+                    if (ast != null) {
+                        LogVisitor v = new LogVisitor();
+                        CompilationUnit cu = ast.getCompilationUnit();
+
+                        if (cu != null) {
+                            cu.accept(v, null);
+                            System.out.println("AST_snapshot_version:" + counter);
+                            System.out.println("Timestamp:" + c.getDate().getTime());
+                            System.out.println(v.getSource());
+                            counter++;
+
+                        }
+
+                    }
+                }
+            }
+
+            System.exit(0);
+        }
 
         System.out.println("Test started at " + Analysis.getStartDate(repository));
 
@@ -29,14 +66,5 @@ public class Main {
         System.out.println("The test lasted " + Analysis.getTestLength(repository) + " minutes");
 
         System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
-
-        for (SourceFile f : repository.getCommits().get(repository.getCommits().size() - 1).getFiles()) {
-            AbstractSyntaxTree ast = f.getAST();
-
-            LogVisitor v = new LogVisitor();
-            ast.getCompilationUnit().accept(v, null);
-            System.out.println(v.getSource());
-        }
-
     }
 }
