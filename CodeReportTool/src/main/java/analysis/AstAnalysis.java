@@ -2,12 +2,14 @@ package analysis;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.LogVisitor;
 import git.AbstractSyntaxTree;
 import git.Commit;
 import git.Repository;
 import git.SourceFile;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,10 +17,16 @@ import java.util.List;
  */
 public class AstAnalysis {
 
+    // TODO use a hashmap to add up all the time spend in methods
     public static void printChangedNodes(Repository repository) {
         int counter = 0;
 
         Node previous = null;
+
+        String previousMethod = null;
+        Commit previousCommit = null;
+
+        Date startTime = null;
 
         top:
         for (Commit c : repository.getCommits()) {
@@ -36,9 +44,28 @@ public class AstAnalysis {
                             Node changed = getChangedNode(previous, cu);
                             previous = cu;
                             if (changed != null) {
-                                System.out.println("Changed: " + changed);
-                                //System.out.println("Type: " + changed.getClass());
-                                //System.out.println(f.getContents());
+
+                                if (previousMethod == null) {
+                                    previousMethod = getMethodName(changed);
+                                    previousCommit = c;
+                                    startTime = c.getDate();
+                                } else {
+                                    if (previousMethod.equals(getMethodName(changed))) {
+
+                                    } else {
+                                        Date endDate = previousCommit.getDate();
+                                        long minutes = (endDate.getTime() - startTime.getTime()) / (1000);
+
+                                        System.out.println(minutes + " seconds spent in " + previousMethod + " method.");
+
+                                        previousMethod = getMethodName(changed);
+                                        previousCommit = c;
+                                        startTime = c.getDate();
+                                    }
+                                    previousMethod = getMethodName(changed);
+                                    previousCommit = c;
+                                }
+
                             }
                         }
 
@@ -50,39 +77,6 @@ public class AstAnalysis {
                 if (counter > 20000) {
                     break top;
                 }
-            }
-        }
-    }
-
-    private static boolean isMemberOf(Node n, List<Node> list) {
-        for (Node x : list) {
-            if (n.hashCode() == x.hashCode()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static void removeFromList(Node n, List<Node> list) {
-        Node toRemove = null;
-        if (isMemberOf(n, list)) {
-            for (Node x : list) {
-                if (x.hashCode() == n.hashCode()) {
-                    toRemove = x;
-                }
-            }
-
-            list.remove(toRemove);
-        }
-    }
-
-    /**
-     * listB - listA
-     */
-    private static void subtractLists(List<Node> listA, List<Node> listB) {
-        for (Node a : listA) {
-            while (isMemberOf(a, listB)) {
-                removeFromList(a, listB);
             }
         }
     }
@@ -136,6 +130,21 @@ public class AstAnalysis {
             return null;
         }
     }
+
+    private static String getMethodName(Node node) {
+        if (node instanceof MethodDeclaration) {
+            return ((MethodDeclaration) node).getName();
+        } else {
+            return getMethodName(node.getParentNode());
+        }
+    }
+
+
+
+
+
+
+
 
     public static void printAstLogFile(Repository repository) {
         int counter = 0;
