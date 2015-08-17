@@ -37,11 +37,5 @@ public class Main {
 
         System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
 
-	for (Commit c : repository.getCommits()) {
-		for (SourceFile f : c.getFiles()) {
-			System.out.println(c.getLineChanges(f.toString()));
-		}
-	}
-
     }
 }
