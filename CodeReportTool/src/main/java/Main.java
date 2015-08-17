@@ -1,11 +1,7 @@
 import analysis.Analysis;
+import analysis.AstAnalysis;
 import com.beust.jcommander.JCommander;
-import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.visitor.LogVisitor;
-import git.AbstractSyntaxTree;
-import git.Commit;
 import git.Repository;
-import git.SourceFile;
 
 public class Main {
 
@@ -33,29 +29,7 @@ public class Main {
         new JCommander(arguments, args);
 
         if (arguments.astlog) {
-            int counter = 0;
-
-            for (Commit c : repository.getCommits()) {
-                for (SourceFile f : c.getFiles()) {
-                    AbstractSyntaxTree ast = f.getAST();
-
-                    if (ast != null) {
-                        LogVisitor v = new LogVisitor();
-                        CompilationUnit cu = ast.getCompilationUnit();
-
-                        if (cu != null) {
-                            cu.accept(v, null);
-                            System.out.println("AST_snapshot_version:" + counter);
-                            System.out.println("Timestamp:" + c.getDate().getTime());
-                            System.out.println(v.getSource());
-                            counter++;
-
-                        }
-
-                    }
-                }
-            }
-
+            AstAnalysis.printAstLogFile(repository);
             System.exit(0);
         }
 
@@ -66,5 +40,7 @@ public class Main {
         System.out.println("The test lasted " + Analysis.getTestLength(repository) + " minutes");
 
         System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
+
+        AstAnalysis.printChangedNodes(repository);
     }
 }
