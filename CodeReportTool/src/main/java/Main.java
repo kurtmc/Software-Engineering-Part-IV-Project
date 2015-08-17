@@ -1,15 +1,5 @@
 import analysis.Analysis;
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseException;
-import com.github.javaparser.TokenMgrError;
-import com.github.javaparser.ast.CompilationUnit;
 import git.Repository;
-import git.SourceFile;
-import git.AbstractSyntaxTree;
-import git.Commit;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Main {
 
