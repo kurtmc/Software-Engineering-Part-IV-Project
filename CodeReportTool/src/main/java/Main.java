@@ -1,5 +1,8 @@
 import analysis.Analysis;
+import com.github.javaparser.ast.visitor.LogVisitor;
+import git.AbstractSyntaxTree;
 import git.Repository;
+import git.SourceFile;
 
 public class Main {
 
@@ -26,6 +29,14 @@ public class Main {
         System.out.println("The test lasted " + Analysis.getTestLength(repository) + " minutes");
 
         System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
+
+        for (SourceFile f : repository.getCommits().get(repository.getCommits().size() - 1).getFiles()) {
+            AbstractSyntaxTree ast = f.getAST();
+
+            LogVisitor v = new LogVisitor();
+            ast.getCompilationUnit().accept(v, null);
+            System.out.println(v.getSource());
+        }
 
     }
 }
