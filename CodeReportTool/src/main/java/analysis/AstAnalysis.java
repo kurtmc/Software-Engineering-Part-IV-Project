@@ -11,9 +11,6 @@ import git.SourceFile;
 
 import java.util.*;
 
-/**
- * Created by Kurt McAlpine on 18/08/15.
- */
 public class AstAnalysis {
 
     public static void addTime(HashMap<String, Long> hashMap, String methodName, long time) {
@@ -33,8 +30,6 @@ public class AstAnalysis {
         String previousMethod = null;
         Commit previousCommit = null;
 
-        Date startTime = null;
-
         HashMap<String, Long> methodTime = new HashMap<>();
 
         top:
@@ -43,7 +38,6 @@ public class AstAnalysis {
                 AbstractSyntaxTree ast = f.getAST();
 
                 if (ast != null) {
-                    LogVisitor v = new LogVisitor();
                     CompilationUnit cu = ast.getCompilationUnit();
 
                     if (cu != null) {
@@ -57,15 +51,13 @@ public class AstAnalysis {
                                 if (previousMethod == null) {
                                     previousMethod = getMethodName(changed);
                                     previousCommit = c;
-                                    startTime = c.getDate();
                                 } else {
                                     String currentMethod = getMethodName(changed);
-                                    Commit currentCommit = c;
 
                                     if (previousMethod.equals(currentMethod)) {
-                                        addTime(methodTime, previousMethod, currentCommit.getDate().getTime() - previousCommit.getDate().getTime());
-
-                                    } else {
+                                        addTime(methodTime,
+                                                previousMethod,
+                                                c.getDate().getTime() - previousCommit.getDate().getTime());
 
                                     }
                                     previousMethod = getMethodName(changed);
@@ -99,8 +91,8 @@ public class AstAnalysis {
     /**
      * Assuming that node a and node b are in order
      * If node a and b have no children and are different b is returned
-     * @param a
-     * @param b
+     * @param a node to compare
+     * @param b node to compare
      */
     public static Node getChangedNode(Node a, Node b) {
 
