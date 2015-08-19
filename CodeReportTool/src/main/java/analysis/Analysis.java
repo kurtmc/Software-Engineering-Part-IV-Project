@@ -35,6 +35,9 @@ public class Analysis {
             endChars += s.getContents().length();
         }
 
-        return (endChars - startChars) / getTestLength(repository);
+        int testLength = getTestLength(repository);
+        if (testLength > 0)
+            return (endChars - startChars) / getTestLength(repository);
+        return 0;
     }
 }

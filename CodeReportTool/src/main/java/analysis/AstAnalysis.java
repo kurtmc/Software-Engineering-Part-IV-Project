@@ -9,15 +9,22 @@ import git.Commit;
 import git.Repository;
 import git.SourceFile;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Kurt McAlpine on 18/08/15.
  */
 public class AstAnalysis {
 
-    // TODO use a hashmap to add up all the time spend in methods
+    public static void addTime(HashMap<String, Long> hashMap, String methodName, long time) {
+        if (hashMap.containsKey(methodName)) {
+            long new_time = hashMap.get(methodName) + time;
+            hashMap.put(methodName, new_time);
+        } else {
+            hashMap.put(methodName, time);
+        }
+    }
+
     public static void printChangedNodes(Repository repository) {
         int counter = 0;
 
@@ -27,6 +34,8 @@ public class AstAnalysis {
         Commit previousCommit = null;
 
         Date startTime = null;
+
+        HashMap<String, Long> methodTime = new HashMap<>();
 
         top:
         for (Commit c : repository.getCommits()) {
@@ -50,17 +59,14 @@ public class AstAnalysis {
                                     previousCommit = c;
                                     startTime = c.getDate();
                                 } else {
-                                    if (previousMethod.equals(getMethodName(changed))) {
+                                    String currentMethod = getMethodName(changed);
+                                    Commit currentCommit = c;
+
+                                    if (previousMethod.equals(currentMethod)) {
+                                        addTime(methodTime, previousMethod, currentCommit.getDate().getTime() - previousCommit.getDate().getTime());
 
                                     } else {
-                                        Date endDate = previousCommit.getDate();
-                                        long minutes = (endDate.getTime() - startTime.getTime()) / (1000);
 
-                                        System.out.println(minutes + " seconds spent in " + previousMethod + " method.");
-
-                                        previousMethod = getMethodName(changed);
-                                        previousCommit = c;
-                                        startTime = c.getDate();
                                     }
                                     previousMethod = getMethodName(changed);
                                     previousCommit = c;
@@ -78,6 +84,15 @@ public class AstAnalysis {
                     break top;
                 }
             }
+
+        }
+
+        Iterator it = methodTime.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            int timeInSeconds = (int) ((long) pair.getValue() / 1000);
+            System.out.println("Spend " + timeInSeconds + " seconds in " + pair.getKey());
+            it.remove(); // avoids a ConcurrentModificationException
         }
     }
 
