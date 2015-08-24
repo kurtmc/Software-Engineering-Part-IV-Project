@@ -1,22 +1,28 @@
 package git;
 
+import com.github.javaparser.ast.CompilationUnit;
 import com.google.common.collect.Lists;
+import utils.Cmd;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.github.javaparser.ast.CompilationUnit;
 
 public class Repository {
 
     private String _path;
 
     public Repository(String path) {
-        this._path = path;
+        String thePath = path;
+
+        // Remove trailing /'s
+        while (thePath.charAt(thePath.length() - 1) == '/')
+            thePath = thePath.substring(0, thePath.length() - 2);
+
+        this._path = thePath;
     }
 
     public String executeGitCommand(String command) {
-        return GitUtils.execShell("cd " + _path + "; " + command);
+        return Cmd.execShell("cd " + _path + "; " + command);
     }
 
     /**

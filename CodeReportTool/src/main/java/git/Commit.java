@@ -42,7 +42,7 @@ public class Commit {
         }
         List<SourceFile> files = new ArrayList<>();
         for (String s : filenames) {
-            files.add(new SourceFile(_repository.getPath() + "/" + s));
+            files.add(new SourceFile(_repository, s));
         }
 
         _repository.executeGitCommand("git checkout " + currentRef);
@@ -53,8 +53,8 @@ public class Commit {
     public List<String> getLineChanges(String path) {
 	    String result = _repository.executeGitCommand("git blame -l " + path + " | grep ^" + _hash);
 	    String[] lines = result.split("\n");
-	    List<String> changes = new ArrayList<String>();
-	    for (String l : lines) {
+        List<String> changes = new ArrayList<>();
+        for (String l : lines) {
 		if (l.length() > 0) {
 			changes.add(l);
 		}
@@ -62,9 +62,8 @@ public class Commit {
 	    String pattern = "([0-9]{1,3})\\)";
 	    Pattern r = Pattern.compile(pattern);
 	    Matcher m = r.matcher("the string");
-	    for (String l : changes) {
-        }
-	    if (changes.size() > 0) {
+
+        if (changes.size() > 0) {
 		    return changes;
 	    }
 	    return null;

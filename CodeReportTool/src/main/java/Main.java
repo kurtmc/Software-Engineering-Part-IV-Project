@@ -2,6 +2,7 @@ import analysis.Analysis;
 import analysis.AstAnalysis;
 import com.beust.jcommander.JCommander;
 import git.Repository;
+import tests.TestRunner;
 
 public class Main {
 
@@ -28,6 +29,9 @@ public class Main {
 
         if (arguments.astlog) {
             AstAnalysis.printAstLogFile(repository);
+            System.exit(0);
+        } else if (arguments.defaultTest != null) {
+            TestRunner.runTestOnEveryAST(arguments.defaultTest, repository);
             System.exit(0);
         } else {
 

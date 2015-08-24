@@ -1,11 +1,10 @@
-package git;
+package utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 
-
-public class GitUtils {
+public class Cmd {
 
 	public static String execShell(String command) {
 		try {

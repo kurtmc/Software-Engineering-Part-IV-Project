@@ -9,12 +9,15 @@ import java.nio.file.Paths;
 
 public class SourceFile {
 
-    String _path;
+    String _relativePath;
+
+    Repository _repository;
 
     String _contents;
 
-    public SourceFile(String path) {
-        _path = path;
+    public SourceFile(Repository repository, String relativePath) {
+        _relativePath = relativePath;
+        _repository = repository;
         readContents();
     }
 
@@ -28,7 +31,7 @@ public class SourceFile {
 
     private void readContents() {
         try {
-            byte[] encoded = Files.readAllBytes(Paths.get(_path));
+            byte[] encoded = Files.readAllBytes(Paths.get(getPath()));
             _contents = new String(encoded, Charset.defaultCharset());
         } catch (IOException e) {
             _contents =  null;
@@ -36,10 +39,18 @@ public class SourceFile {
     }
 
     public String toString() {
-        return _path;
+        return getPath();
     }
 
     public AbstractSyntaxTree getAST() {
 	    return new AbstractSyntaxTree(this);
+    }
+
+    public String getPath() {
+        return _repository.getPath() + "/" + _relativePath;
+    }
+
+    public String getRelativePath() {
+        return _relativePath;
     }
 }
