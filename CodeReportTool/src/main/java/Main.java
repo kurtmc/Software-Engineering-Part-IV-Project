@@ -5,8 +5,6 @@ import git.Repository;
 
 public class Main {
 
-    private static Repository repository;
-
     private static void print(Object o) {
         System.out.println(o);
     }
@@ -21,7 +19,7 @@ public class Main {
 	        System.exit(1);
         }
 
-        repository = new Repository(args[0]);
+        Repository repository = new Repository(args[0]);
 
         repository.checkoutMaster();
 
@@ -31,16 +29,17 @@ public class Main {
         if (arguments.astlog) {
             AstAnalysis.printAstLogFile(repository);
             System.exit(0);
+        } else {
+
+            System.out.println("Test started at " + Analysis.getStartDate(repository));
+
+            System.out.println("Test ended at " + Analysis.getEndDate(repository));
+
+            System.out.println("The test lasted " + Analysis.getTestLength(repository) + " minutes");
+
+            System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
+
+            AstAnalysis.printChangedNodes(repository);
         }
-
-        System.out.println("Test started at " + Analysis.getStartDate(repository));
-
-        System.out.println("Test ended at " + Analysis.getEndDate(repository));
-
-        System.out.println("The test lasted " + Analysis.getTestLength(repository) + " minutes");
-
-        System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
-
-        AstAnalysis.printChangedNodes(repository);
     }
 }
