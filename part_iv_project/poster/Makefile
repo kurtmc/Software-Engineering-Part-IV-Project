@@ -1,4 +1,4 @@
-NAME = conference_poster_6
+NAME = poster
 
 all:
 	pdflatex $(NAME).tex
