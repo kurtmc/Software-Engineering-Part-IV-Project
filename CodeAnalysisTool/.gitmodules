@@ -1,0 +1,3 @@
+[submodule "CodeReportTool"]
+	path = CodeReportTool
+	url = git@github.com:kurtmc/CodeReportTool.git
