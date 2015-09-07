@@ -79,11 +79,12 @@ public class AstAnalysis {
 
         }
 
+        System.out.println("Time spent in functions:");
         Iterator it = methodTime.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             int timeInSeconds = (int) ((long) pair.getValue() / 1000);
-            System.out.println("Spent " + timeInSeconds + " seconds in " + pair.getKey());
+            System.out.println("\t" + pair.getKey() + ": " + timeInSeconds + "s");
             it.remove(); // avoids a ConcurrentModificationException
         }
     }
