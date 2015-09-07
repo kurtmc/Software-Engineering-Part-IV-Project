@@ -4,7 +4,7 @@ git checkout incomplete
 
 mkdir exportedSimpleTest
 
-cp -r .classpath .project SimpleTest.eml SimpleTest.userlibraries src exportedSimpleTest/
+cp -r save_test.sh .classpath .project SimpleTest.eml SimpleTest.userlibraries src exportedSimpleTest/
 
 mv exportedSimpleTest ../
 
