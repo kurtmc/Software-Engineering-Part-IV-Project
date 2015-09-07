@@ -83,7 +83,7 @@ public class AstAnalysis {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             int timeInSeconds = (int) ((long) pair.getValue() / 1000);
-            System.out.println("Spend " + timeInSeconds + " seconds in " + pair.getKey());
+            System.out.println("Spent " + timeInSeconds + " seconds in " + pair.getKey());
             it.remove(); // avoids a ConcurrentModificationException
         }
     }
