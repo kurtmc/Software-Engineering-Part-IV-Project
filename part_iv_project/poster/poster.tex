@@ -46,21 +46,13 @@
 
 \begin{document}
 
-%----------------------------------------------------------------------------------------
-%	POSTER HEADER 
-%----------------------------------------------------------------------------------------
-
-% The header is divided into two boxes:
-% The first is 75% wide and houses the title, subtitle, names, university/organization and contact information
-% The second is 25% wide and houses a logo for your university/organization or a photo of you
-% The widths of these boxes can be easily edited to accommodate your content as you see fit
-
 \begin{minipage}[b]{0.75\textwidth}
 \Huge \color{NavyBlue} \textbf{Analysing Student Performance During Tests} \color{Black}\\ % Title
 \huge\textit{By Analysing the History of the Code}\\[2cm] % Subtitle
 \Large \textbf{Kurt McAlpine}\\[0.5cm] % Author(s)
+\Large Group 11\\[0.4cm]
 \Large University of Auckland\\[0.4cm] % University/organization
-\large \texttt{kmca733@aucklanduni.ac.nz}\\
+\large \texttt{kurt@linux.com}\\
 \end{minipage}
 %
 \begin{minipage}[b]{0.25\textwidth}
@@ -69,13 +61,7 @@
 
 \vspace{1cm} % A bit of extra whitespace between the header and poster content
 
-%----------------------------------------------------------------------------------------
-
 \begin{multicols}{2} % This is how many columns your poster will be broken into, a portrait poster is generally split into 2 columns
-
-%----------------------------------------------------------------------------------------
-%	ABSTRACT
-%----------------------------------------------------------------------------------------
 
 \color{Navy} % Navy color for the abstract
 
@@ -92,13 +78,9 @@ good practical skills.
 
 \end{abstract}
 
-%----------------------------------------------------------------------------------------
-%	INTRODUCTION
-%----------------------------------------------------------------------------------------
-
 \color{SaddleBrown} % SaddleBrown color for the introduction
 
-\section*{Introduction}
+\section*{Motivation}
 
 In the world today, programming and programs are prevalent and abundant in our
 every day lives. Therefore it is an important skill. It's
@@ -118,13 +100,11 @@ confidence that plagiarism can be detected automatically without tedious manual
 inspection of student submissions as well as detecting plagiarised work that the
 student has attempted to conceal.
 
-%----------------------------------------------------------------------------------------
-%	OBJECTIVES
-%----------------------------------------------------------------------------------------
-
 \color{DarkSlateGray} % DarkSlateGray color for the rest of the content
 
 \section*{Description of Tools}
+
+\subsection*{Eclipse Plugin}
 
 We have implemented a plugin for the Eclipse IDE that allows students to take a
 programming test in class using their own laptop or this plugin can be
@@ -138,6 +118,8 @@ test they submit their Eclipse workspace.
 \includegraphics[width=0.8\linewidth]{eclipse}
 \captionof{figure}{\color{Green} Screenshot of a test in progress}
 \end{center}\vspace{1cm}
+
+\subsection*{Code Analysis Tool}
 
 Once all student submission have been collected we can begin the analysis of
 the tests. Using a command line application that we have implemented
@@ -160,26 +142,22 @@ complete these functions and therefore determine if he or she needs to spend
 for time in class going over the topic related to the functions that took
 students the longest to implement.
 
+Furthermore this tool allows us to test the students submission against unit
+tests if provided. Combining the ability to test student submissions with the
+ability to look at snapshots of the submission at any point in history we can
+run the tests against every compilable verison of the submission to collect
+data about how long it took the student to implement certain parts of the test.
 
- %----------------------------------------------------------------------------------------
-%	REFERENCES
-%----------------------------------------------------------------------------------------
+\begin{center}\vspace{1cm}
+\includegraphics[width=0.8\linewidth]{CodeReportTool}
+\captionof{figure}{\color{Green} Screenshot of simple analysis of a single test}
+\end{center}\vspace{1cm}
 
 {\small
-\nocite{*} % Print all references regardless of whether they were cited in the poster or not
+%\nocite{*} % Print all references regardless of whether they were cited in the poster or not
 \bibliographystyle{plain} % Plain referencing style
 \bibliography{references} % Use the example bibliography file sample.bib
 }
-
-%----------------------------------------------------------------------------------------
-%	ACKNOWLEDGEMENTS
-%----------------------------------------------------------------------------------------
-
-\section*{Acknowledgements}
-
-Etiam fermentum, arcu ut gravida fringilla, dolor arcu laoreet justo, ut imperdiet urna arcu a arcu. Donec nec ante a dui tempus consectetur. Cras nisi turpis, dapibus sit amet mattis sed, laoreet.
-
-%----------------------------------------------------------------------------------------
 
 \end{multicols}
 \end{document}
