@@ -42,6 +42,10 @@ def main():
     test_length_data.write(format_gnuplot(data, ["test_length"]))
     test_length_data.close()
 
+    char_per_minute_data = open("char_per_minute.data", "w")
+    char_per_minute_data.write(format_gnuplot(data, ["char_per_minute"]))
+    char_per_minute_data.close()
+
     data = list()
 
     method_names = ["factorial", "fibonacci", "min", "max", "reverse", "isPalindrome", "shuffle", "rotate"]
@@ -54,6 +58,7 @@ def main():
 
     run_command(["gnuplot", "method_length.gnuplot"])
     run_command(["gnuplot", "test_length.gnuplot"])
+    run_command(["gnuplot", "char_per_minute.gnuplot"])
 
 
 def run_command(cmd_list):
