@@ -52,6 +52,9 @@ def main():
     method_time_data.write(format_gnuplot(data, method_names))
     method_time_data.close()
 
+    run_command(["gnuplot", "method_length.gnuplot"])
+    run_command(["gnuplot", "test_length.gnuplot"])
+
 
 def run_command(cmd_list):
     return subprocess.Popen(cmd_list, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
@@ -110,7 +113,7 @@ def format_gnuplot(data, names):
         for value in data[i]:
             gnuplot += str(value) + " "
         gnuplot += "0.3"
-        gnuplot += " " + names[i] + "\n"
+        gnuplot += " \"" + names[i].replace("_"," ") + "\"\n"
 
     return gnuplot
         

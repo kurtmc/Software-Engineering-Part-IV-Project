@@ -13,5 +13,6 @@ set xtics rotate by 45 right
 
 # set bars 4.0
 set style fill empty
-plot 'method_time.data' using 1:3:2:6:5:7:xticlabels(8) with candlesticks title 'Quartiles' whiskerbars, \
+
+plot 'method_time.data' using 1:3:2:6:5:7:xticlabels(8) with candlesticks notitle whiskerbars, \
   ''         using 1:4:4:4:4:7 with candlesticks lt -1 notitle
