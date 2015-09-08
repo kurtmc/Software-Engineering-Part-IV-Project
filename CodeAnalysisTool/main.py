@@ -32,9 +32,6 @@ def main():
         if f.endswith(".zip"):
             results.append(collectData(f, code_report_tool_path))
 
-    pp = pprint.PrettyPrinter(indent=4)
-    pp.pprint(results)
-
     os.chdir(previous_dir)
 
     data = list()
@@ -97,8 +94,6 @@ def process_results(results, attribute):
             time_to_complete.append(student[attribute])
         else:
             time_to_complete.append(0)
-
-    print(time_to_complete)
 
     min_value = min(time_to_complete)
     max_value = max(time_to_complete)
