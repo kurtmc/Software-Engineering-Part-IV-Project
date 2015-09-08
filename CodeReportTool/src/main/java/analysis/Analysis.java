@@ -21,23 +21,27 @@ public class Analysis {
     }
 
     public static int getCharactersPerMinute(Repository repository) {
-        Commit first = repository.getCommits().get(0);
-        Commit last = repository.getCommits().get(repository.getCommits().size() - 1);
+            Commit first = repository.getCommits().get(0);
+            Commit last = repository.getCommits().get(repository.getCommits().size() - 1);
 
-        int startChars = 0;
-        int endChars = 0;
+            int startChars = 0;
+            int endChars = 0;
 
-        for (SourceFile s : first.getFiles()) {
-            startChars += s.getContents().length();
-        }
+            if (first == null)
+                return 0;
 
-        for (SourceFile s : last.getFiles()) {
-            endChars += s.getContents().length();
-        }
+            for (SourceFile s : first.getFiles()) {
+                startChars += s.getContents().length();
+            }
 
-        int testLength = getTestLength(repository);
-        if (testLength > 0)
-            return (endChars - startChars) / getTestLength(repository);
+            for (SourceFile s : last.getFiles()) {
+                endChars += s.getContents().length();
+            }
+
+            int testLength = getTestLength(repository);
+            if (testLength > 0)
+                return (endChars - startChars) / getTestLength(repository);
+
         return 0;
     }
 }
