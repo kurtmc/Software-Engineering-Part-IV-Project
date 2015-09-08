@@ -1,2 +1,5 @@
 bin/
 *.swp
+*.data
+.directory
+*.png

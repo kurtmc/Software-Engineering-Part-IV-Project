@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import re
 import numpy
+import pprint
 
 def main():
     if len(sys.argv) < 2:
@@ -31,7 +32,8 @@ def main():
         if f.endswith(".zip"):
             results.append(collectData(f, code_report_tool_path))
 
-    print(results)
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(results)
 
     os.chdir(previous_dir)
 
@@ -66,7 +68,7 @@ def collectData(filename, code_report_tool_path):
 
     repo_dir = dir_name + "/" + os.listdir(dir_name)[0]
 
-    output = run_command(["java", "-jar", code_report_tool_path, repo_dir])
+    output = run_command(["java", "-jar", code_report_tool_path, repo_dir, "-sourceFile", "Main.java"])
 
     shutil.rmtree(dir_name)
 
@@ -79,7 +81,7 @@ def collectData(filename, code_report_tool_path):
         if item.startswith("Characters per minute"):
             values["char_per_minute"] = [token for token in item.split() if token.isdigit()][0]
         if item.startswith("\t"):
-            s = re.findall(r"[\w':]+", item)
+            s = re.findall(r"[\w']+", item)
             values[s[0]] = int(s[1][:-1])
             
 
@@ -91,10 +93,12 @@ def process_results(results, attribute):
     time_to_complete = list()
 
     for student in results:
-        try:
+        if attribute in student.keys():
             time_to_complete.append(student[attribute])
-        except KeyError:
+        else:
             time_to_complete.append(0)
+
+    print(time_to_complete)
 
     min_value = min(time_to_complete)
     max_value = max(time_to_complete)
