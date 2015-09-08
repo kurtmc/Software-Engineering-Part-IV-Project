@@ -22,11 +22,8 @@ public class Main {
 
         Repository repository = new Repository(args[0]);
 
-	String s = repository.executeGitCommand("git status");
-	System.out.println(s);
-	s = repository.executeGitCommand("pwd");
-	System.out.println(s);
-	System.exit(0);
+        // Clean the repo
+        repository.executeGitCommand("git clean -fxd");
 
         repository.checkoutMaster();
 
@@ -39,7 +36,9 @@ public class Main {
         } else if (arguments.defaultTest != null) {
             TestRunner.runTestOnEveryAST(arguments.defaultTest, repository);
             System.exit(0);
-        } else {
+        }
+
+        if (arguments.sourceFile != null) {
 
             System.out.println("Test started at " + Analysis.getStartDate(repository));
 
@@ -49,7 +48,9 @@ public class Main {
 
             System.out.println("Characters per minute " + Analysis.getCharactersPerMinute(repository));
 
-            AstAnalysis.printChangedNodes(repository);
+            AstAnalysis.printChangedNodes(repository, arguments.sourceFile);
+        } else {
+            System.out.println("Must provide an argument for -sourceFile");
         }
     }
 }

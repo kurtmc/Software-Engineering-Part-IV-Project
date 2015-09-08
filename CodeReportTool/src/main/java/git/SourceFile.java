@@ -53,4 +53,9 @@ public class SourceFile {
     public String getRelativePath() {
         return _relativePath;
     }
+
+    public String getFileName() {
+        String[] pathSplit = _relativePath.split("/");
+        return pathSplit[pathSplit.length - 1];
+    }
 }

@@ -22,7 +22,7 @@ public class AstAnalysis {
         }
     }
 
-    public static void printChangedNodes(Repository repository) {
+    public static void printChangedNodes(Repository repository, String file) {
         int counter = 0;
 
         Node previous = null;
@@ -35,6 +35,9 @@ public class AstAnalysis {
         top:
         for (Commit c : repository.getCommits()) {
             for (SourceFile f : c.getFiles()) {
+                if (!f.getFileName().equals(file))
+                    continue;
+
                 AbstractSyntaxTree ast = f.getAST();
 
                 if (ast != null) {
@@ -140,6 +143,9 @@ public class AstAnalysis {
     }
 
     private static String getMethodName(Node node) {
+        if (node == null)
+            return null;
+
         if (node instanceof MethodDeclaration) {
             return ((MethodDeclaration) node).getName();
         } else {
