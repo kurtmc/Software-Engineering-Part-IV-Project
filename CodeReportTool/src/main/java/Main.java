@@ -22,6 +22,12 @@ public class Main {
 
         Repository repository = new Repository(args[0]);
 
+	String s = repository.executeGitCommand("git status");
+	System.out.println(s);
+	s = repository.executeGitCommand("pwd");
+	System.out.println(s);
+	System.exit(0);
+
         repository.checkoutMaster();
 
         ArgumentParser arguments = new ArgumentParser();

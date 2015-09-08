@@ -31,6 +31,9 @@ public class Analysis {
                 return 0;
 
             for (SourceFile s : first.getFiles()) {
+		if (s == null || s.getContents() == null)
+			return 0;
+
                 startChars += s.getContents().length();
             }
 
