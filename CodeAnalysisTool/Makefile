@@ -1,6 +1,6 @@
 all:
 	cd CodeReportTool; gradle build
-	mkdir bin
+	mkdir -p bin
 	cp ./CodeReportTool/build/libs/CodeReportTool-1.0-SNAPSHOT.jar bin/CodeReportTool.jar
 
 clean:
