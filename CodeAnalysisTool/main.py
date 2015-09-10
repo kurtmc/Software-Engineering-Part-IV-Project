@@ -9,6 +9,8 @@ import re
 import numpy
 import pprint
 import json
+import gnuplot
+import utils
 
 def main():
     if len(sys.argv) < 2:
@@ -52,9 +54,11 @@ def main():
     method_time_data.write(format_gnuplot(data, method_names))
     method_time_data.close()
 
-    run_command(["gnuplot", "method_length.gnuplot"])
-    run_command(["gnuplot", "test_length.gnuplot"])
-    run_command(["gnuplot", "char_per_minute.gnuplot"])
+    utils.run_command(["gnuplot", "method_length.gnuplot"])
+    gnuplot.plot_box_and_whiskers("Length of time taken to complete test",
+            None, "Time taken in minutes", "test_length.data",
+            "test_length.png", [0, 2], [0, 45])
+    utils.run_command(["gnuplot", "char_per_minute.gnuplot"])
 
 def get_result_data(path, code_report_tool_path):
 
@@ -79,8 +83,6 @@ def get_result_data(path, code_report_tool_path):
 
     return results
 
-def run_command(cmd_list):
-    return subprocess.Popen(cmd_list, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
 
 def collectData(filename, code_report_tool_path):
 
@@ -91,7 +93,7 @@ def collectData(filename, code_report_tool_path):
 
     repo_dir = dir_name + "/" + os.listdir(dir_name)[0]
 
-    output = run_command(["java", "-jar", code_report_tool_path, repo_dir, "-sourceFile", "Main.java"])
+    output = utils.run_command(["java", "-jar", code_report_tool_path, repo_dir, "-sourceFile", "Main.java"])
 
     shutil.rmtree(dir_name)
 
@@ -139,9 +141,6 @@ def format_gnuplot(data, names):
         gnuplot += " \"" + names[i].replace("_"," ") + "\"\n"
 
     return gnuplot
-        
-
     
-
 if __name__ == '__main__':
     main()
