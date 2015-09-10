@@ -69,6 +69,10 @@ def main():
     os.remove("char_per_minute.data")
     os.remove("method_time.data")
 
+    utils.run_command("convert -flatten char_per_minute.png char_per_minute_white.png".split())
+    utils.run_command("convert -flatten method_time.png method_time_white.png".split())
+    utils.run_command("convert -flatten test_length.png test_length_white.png".split())
+
     utils.run_command(["mkdir", "-p", "graphs"])
     mv_images = ["mv"] + glob.glob("*.png") + ["graphs/"]
     utils.run_command(mv_images)
