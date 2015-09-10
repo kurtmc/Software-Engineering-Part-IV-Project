@@ -11,6 +11,7 @@ import pprint
 import json
 import gnuplot
 import utils
+import glob
 
 def main():
     if len(sys.argv) < 2:
@@ -63,6 +64,14 @@ def main():
     gnuplot.plot_box_and_whiskers("Characters per minute", None,
             "Characters per minute", "test_length.data", "char_per_minute.png",
             [0, 2], [0, 45])
+
+    os.remove("test_length.data")
+    os.remove("char_per_minute.data")
+    os.remove("method_time.data")
+
+    utils.run_command(["mkdir", "-p", "graphs"])
+    mv_images = ["mv"] + glob.glob("*.png") + ["graphs/"]
+    utils.run_command(mv_images)
 
 def get_result_data(path, code_report_tool_path):
 
