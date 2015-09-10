@@ -54,11 +54,15 @@ def main():
     method_time_data.write(format_gnuplot(data, method_names))
     method_time_data.close()
 
-    utils.run_command(["gnuplot", "method_length.gnuplot"])
+    gnuplot.plot_box_and_whiskers("Time spend implementing methods",
+            "Method names", "Time in seconds", "method_time.data",
+            "method_time.png", [0, 9], [0, 500], 45)
     gnuplot.plot_box_and_whiskers("Length of time taken to complete test",
             None, "Time taken in minutes", "test_length.data",
             "test_length.png", [0, 2], [0, 45])
-    utils.run_command(["gnuplot", "char_per_minute.gnuplot"])
+    gnuplot.plot_box_and_whiskers("Characters per minute", None,
+            "Characters per minute", "test_length.data", "char_per_minute.png",
+            [0, 2], [0, 45])
 
 def get_result_data(path, code_report_tool_path):
 
