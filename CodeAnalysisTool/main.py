@@ -8,6 +8,7 @@ import subprocess
 import re
 import numpy
 import pprint
+import json
 
 def main():
     if len(sys.argv) < 2:
@@ -26,12 +27,7 @@ def main():
 
     os.chdir(tests_dir)
 
-    results = list()
-
-    for f in os.listdir(os.getcwd()):
-        if f.endswith(".zip"):
-            results.append(collectData(f, code_report_tool_path))
-
+    results = get_result_data(os.getcwd(), code_report_tool_path)
     os.chdir(previous_dir)
 
     data = list()
@@ -60,6 +56,28 @@ def main():
     run_command(["gnuplot", "test_length.gnuplot"])
     run_command(["gnuplot", "char_per_minute.gnuplot"])
 
+def get_result_data(path, code_report_tool_path):
+
+    # get stored results
+    try:
+        with open(".results.cache") as results_file:
+            results = json.load(results_file)
+    except FileNotFoundError:
+        results = list()
+
+    processed_names = list()
+    for student in results:
+        processed_names.append(student["name"])
+
+    for f in os.listdir(path):
+        if f.endswith(".zip") and f[:-4] not in processed_names:
+            results.append(collectData(f, code_report_tool_path))
+
+    # store new results
+    with open(".results.cache", "w") as results_file:
+        json.dump(results, results_file)
+
+    return results
 
 def run_command(cmd_list):
     return subprocess.Popen(cmd_list, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
