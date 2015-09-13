@@ -1,0 +1,9 @@
+# Getting started with developement
+You need to install some components to develope eclipse plugins.
+
+The first thing you need is Eclipse PDE (Plug-in Development Environment) which
+can be installed from the eclipse market place. The second component needed is
+Eclipse RCP Target Compnents which can be installed via Help > Install New
+Software. Change the updated site to
+http://download.eclipse.org/eclipse/updates/<your version> then look for
+"Eclipse RCP Target Components"
