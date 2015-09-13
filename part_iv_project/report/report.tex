@@ -146,13 +146,21 @@ system of storing changes to a file isn't feasible for a small project like this
 so libgit2 is a good fit.
 
 \section{Implementation}
+
+I have implemented several components that make up the software solution for my
+project. First is the Eclipse Plugin which is an end user oriented plugin
+available for students to install onto their machines. Code Report Tool is a
+command line application used for the analysis of individual test submissions.
+Finally Code Analysis Tool is used in conjunction with Code Report Tool to
+aggregate information retrieved from multiple student test submissions.
+
 \subsection{Eclipse Plugin}
 \subsection{Code Report Tool}
 \subsection{Code Analysis Tool}
 
-An example of the series of snapshots that can be retrived from a repo are
-shown below. The following are snapshots from a test that I completed, all the
-snapshots are able to be parsed by the Java compiler.
+An example of the series of snapshots that can be retrieved from a repository
+are shown below. The following are snapshots from a test that I completed, all
+the snapshots are able to be parsed by the Java compiler.
 \begin{lstlisting}[frame=single]
 public static int max(int[] numbers) {
 	return 	0;
