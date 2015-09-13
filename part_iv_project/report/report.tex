@@ -1,12 +1,29 @@
-% Form slides:
-% no more than 5 pages
-% two columns
-% title and originality statement are not counted
 \documentclass[twocolumn]{article}
 \usepackage{datetime}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
 
 \begin{document}
+
+% Source code highlighting
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+\lstset{language=Java,
+	basicstyle=\ttfamily\tiny,
+	keywordstyle=\color{javapurple}\bfseries,
+	stringstyle=\color{javared},
+	commentstyle=\color{javagreen},
+	morecomment=[s][\color{javadocblue}]{/**}{*/},
+	numbers=none,
+	stepnumber=2,
+	numbersep=10pt,
+	tabsize=2,
+	showspaces=false,
+showstringspaces=false,
+framesep=0pt}
 
 % Title
 \pagenumbering{gobble}
@@ -26,15 +43,6 @@ good practical skills.
 
 \end{abstract}
 
-% Introduction:
-% - project scope
-% - to what extent
-% * go from general to specific
-% * software/software engineering is important
-% * programming is difficult
-% * struggling in class can cause plaigirism, dropping out
-% - contributions this projects makes to the world
-% - overview of report
 \section{Introduction}
 In the world today, programming and programs are prevalent and abundant in our
 every day lives. Therefore it is an important skill. It's
@@ -55,10 +63,6 @@ inspection of student submissions as well as detecting plagiarised work that the
 student has attempted to conceal.
 % TODO overview of report
 
-% Background: (contains technical aspects)
-% * what is eclipse
-% * mention some of the plagiarism tools that exist, mention how the only analyse end result
-% - ACP (some plugin) exists but it lacks features
 \section{Background}
 Eclipse is an IDE (Integrated Development Environment) that is written in Java.
 It can be used to develop in a variety of programming languages. It also has
@@ -90,11 +94,6 @@ decrypt the tests. When a secret code is distributed to the students they may
 type it in and begin the test. After a predetermined amount of time the the test
 is over and the students must submit their code through the eclipse plugin.
 
-% Active Test Programmer:
-% - no implementation details
-% - features
-% - plaigirism module
-% - teacher visualisation tool
 \section{Active Test Programmer}
 For my project, we are going to extend ATP to give lecturers confidence that
 plagiarism that has occurred during the test can be detected automatically. The
@@ -131,9 +130,7 @@ Viewing reports: Reports can be generated that contain analyses of student
 tests. In the analyses it will contain a score of how likely it was that the
 students submission contains plagiarised work. The history also gives us the
 opportunity to go beyond just checking for plagiarism.
-% Interim Report:
-% - technologies considered, pros/cons (why eclipse for instance)
-% - related work (research)
+
 \section{Technologies Considered}
 % libgit2, eclipse because ACP already developed, research???
 For this project the client application will be implemented using the Eclipse
@@ -149,10 +146,7 @@ it can be integrated into this project without license concerns. Implementing a
 system of storing changes to a file isn't feasible for a small project like this
 so libgit2 is a good fit.
 
-
-% Implementation:
 \section{Implementation}
-% libgit2, eclipse text listener, prototype
 So far into the project I have made a small prototype to demonstrate some of the
 functionality. This prototype confirms that it is possible to record the history
 of a students work. I have made a modification to the ACP plugin that attaches a
@@ -160,10 +154,61 @@ listener to the current document the user is editing. The listener receives an
 event for every keystroke in the document. It also receives events when a paste
 is done, so it possible to see what is in the clipboard when the user pastes.
 
-% Evaluation:
-% - students
-% - how accurate
-% - performance metrics
+An example of the series of snapshots that can be retrived from a repo are
+shown below. The following are snapshots from a test that I completed, all the
+snapshots are able to be parsed by the Java compiler.
+\begin{lstlisting}[frame=single]
+public static int max(int[] numbers) {
+	return 	0;
+}
+\end{lstlisting}
+\begin{lstlisting}[frame=single]
+public static int max(int[] numbers) {
+	int max = numbers[0];
+	return 	0;
+}
+\end{lstlisting}
+\begin{lstlisting}[frame=single]
+public static int max(int[] numbers) {
+	int max = numbers[0];
+	for (int i = 0; i < numbers.length; i++) {
+	}
+	return 	0;
+}
+\end{lstlisting}
+\begin{lstlisting}[frame=single]
+public static int max(int[] numbers) {
+	int max = numbers[0];
+	for (int i = 0; i < numbers.length; i++) {
+		if (max < numbers[i]) {
+		}
+	}
+	return 	0;
+}
+\end{lstlisting}
+\begin{lstlisting}[frame=single]
+public static int max(int[] numbers) {
+	int max = numbers[0];
+	for (int i = 0; i < numbers.length; i++) {
+		if (max < numbers[i]) {
+			max = numbers[i];
+		}
+	}
+	return 	0;
+}
+\end{lstlisting}
+\begin{lstlisting}[frame=single]
+public static int max(int[] numbers) {
+	int max = numbers[0];
+	for (int i = 0; i < numbers.length; i++) {
+		if (max < numbers[i]) {
+			max = numbers[i];
+		}
+	}
+	return 	max;
+}
+\end{lstlisting}
+
 \section{Evaluation}
 To evaluate the effectiveness of the tool, mock tests will be performed with
 volunteers to gather some test data. Some of the volunteers will be asked to
@@ -172,10 +217,7 @@ accuracy of plagiarism detection. It will also be a good opportunity to get user
 feedback and find out about potential bugs and problems before the tool is used
 in a more realistic setting.
 
-% Conclusions
 \section{Conclusions}
-% Some conclusion. Solution can be used in a more general sense, not just
-% related to plaigirism
 Many student tests today to not assess students in a practical manner. The
 reason I think that pen and paper tests are popular is because lecturers are
 concerned that practical tests will give students an easy opportunity to
@@ -190,7 +232,6 @@ or class. This information could be used to guide the lecturer on which topics
 to focus on in class and therefore give students a more effective learning
 experience.
 
-% References
 \bibliographystyle{IEEEtran}
 \bibliography{references}
 
