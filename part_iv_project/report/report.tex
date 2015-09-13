@@ -132,7 +132,6 @@ students submission contains plagiarised work. The history also gives us the
 opportunity to go beyond just checking for plagiarism.
 
 \section{Technologies Considered}
-% libgit2, eclipse because ACP already developed, research???
 For this project the client application will be implemented using the Eclipse
 plugin framework. There are other IDE's that could potentially be used because
 it also have a plugin architecture for example IntelliJ but Eclipse was chosen
@@ -147,12 +146,9 @@ system of storing changes to a file isn't feasible for a small project like this
 so libgit2 is a good fit.
 
 \section{Implementation}
-So far into the project I have made a small prototype to demonstrate some of the
-functionality. This prototype confirms that it is possible to record the history
-of a students work. I have made a modification to the ACP plugin that attaches a
-listener to the current document the user is editing. The listener receives an
-event for every keystroke in the document. It also receives events when a paste
-is done, so it possible to see what is in the clipboard when the user pastes.
+\subsection{Eclipse Plugin}
+\subsection{Code Report Tool}
+\subsection{Code Analysis Tool}
 
 An example of the series of snapshots that can be retrived from a repo are
 shown below. The following are snapshots from a test that I completed, all the
