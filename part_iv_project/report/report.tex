@@ -163,8 +163,55 @@ aggregate information retrieved from multiple student test submissions.
 \caption{Screenshot of a test in progress}
 \end{figure}
 
+Eclipse was the IDE of choice for this project due to its use in undergraduate
+classes at the University of Auckland. The plugin I have developed for Eclipse
+allows us to give students a test as an Eclipse project. Students can copy this
+test from the internet for via USB drive or other portable storage device
+handed out by the instructor. During the test the plugin keeps track of what
+the user is doing and records a fair amount of information to the local data
+storage device. When the test is complete the student must submit the Eclipse
+project to the instructor so that we may do some analysis as well as grade the
+test.\\
+
+Whilst the student is using Eclipse during a test with the plugin installed.
+The plugin is able to attach an event listener to current document objects. The
+document object represents the text editor in Eclipse used to modify code. The
+event listener is able to listen to keystroke and view focus events. What is
+happening under the hood whist the student modifies code during the test is
+that the plugin saves the current edited document to the local storage device
+every time at least one second has passed and an event is fired. This limits
+the maximum frequency of writes to local storage device to be exactly one per
+second. This frequency may be adjusted if needed by from my experience with an
+old inexpensive laptop from 2012, there is no noticeable performance hit with a
+frequency of one per second. In addition to writing the file to local storage
+at a maximum frequency of once per second a Git commit is created. A Git commit
+is essentially a snapshot of the current state of all the files in the project.
+The use of Git as a snapshot file format is a very convenient way to store the
+data. The Git interface is simple so it allowed me to quickly develop a way to
+save snapshots of a file. It is space efficient as it only stores file
+differences and not copies of files. The interface also allows use to easily
+retrieve a snapshot from any point in time which is convenient for when we want
+to analyse snapshots of a students test submission.\\
+
+When the student submits their project all the history comes along with the
+project stored in a directory named \texttt{.git}. Which we may use to perform
+our analysis.
+
 \subsection{Code Report Tool}
 \subsection{Code Analysis Tool}
+
+\subsection{Open Source Tools}
+All the tools I have developed for this project are licensed under the GNU
+General Public Licence and are available for free from \url{github.com}. As
+well as the source code there are instructions for building and using the tools
+and they are available here:
+{\footnotesize
+\begin{itemize}
+\item \url{https://github.com/kurtmc/EclipseHistoryPlugin}
+\item \url{https://github.com/kurtmc/CodeReportTool}
+\item \url{https://github.com/kurtmc/CodeAnalysisTool}
+\end{itemize}
+}
 
 An example of the series of snapshots that can be retrieved from a repository
 are shown below. The following are snapshots from a test that I completed, all

@@ -1,4 +1,4 @@
-personal_ws-1.1 en 26 
+personal_ws-1.1 en 27 
 morecomment
 framesep
 javapurple
@@ -23,5 +23,6 @@ workspace
 IEEEtran
 keywordstyle
 javared
+github
 libgit
 basicstyle
