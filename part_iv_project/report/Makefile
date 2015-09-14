@@ -2,6 +2,7 @@ file_no_ext=report
 output_pdf=2015_Final_Report_Proj011_kmca733
 
 all:
+	cd figures/ast && $(MAKE)
 	pdflatex $(file_no_ext).tex
 	bibtex $(file_no_ext).aux
 	pdflatex $(file_no_ext).tex

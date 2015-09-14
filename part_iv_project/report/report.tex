@@ -258,6 +258,34 @@ public static int max(int[] numbers) {
 }
 \end{lstlisting}
 
+What Code Report Tools allows us to do is point it to a submitted test and
+extract some simple metrics. Since we have a first snapshot and a final
+snapshot we can calculate the length of time spent working on the test. This
+measurement is more accurate than comparing the submission time to the start
+time as there are many factors that could delay the start of a test as well as
+delays which would cause the student submit the test after he or she has
+completed the test. Using the snapshots we can acturately determine precisely
+when they started modifying the test to when they stop modifying the test.
+
+Since we can calculate the length of time spent working on the test, we can
+also calculate the average characters per minute. Since we have a snapshot for
+every state of the test we can count the amount of characters added to the test
+and then get the average typing speed.
+
+\begin{figure}[h!bt]
+\centering
+\includegraphics[width=\linewidth]{figures/ast/ast1}
+\caption{Initial AST}
+\centering
+\includegraphics[width=\linewidth]{figures/ast/ast2}
+\caption{Variable declartion node added to method node}
+\centering
+\includegraphics[width=\linewidth]{figures/ast/ast3}
+\caption{If block added to method node}
+\centering
+\includegraphics[width=\linewidth]{figures/ast/ast4}
+\caption{Variable declartion node added to method node}
+\end{figure}
 
 \subsection{Code Analysis Tool}
 
