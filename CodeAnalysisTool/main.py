@@ -55,9 +55,21 @@ def main():
     method_time_data.write(format_gnuplot(data, method_names))
     method_time_data.close()
 
+    student_name = "kurt"
+    student_method_time_data = open("student_method_time.data", "w")
+    student_result = None
+    for v in results:
+        if v["name"] == student_name:
+            student_result = v
+            break
+
+    student_method_time_data.write(format_individual_student(student_result,
+        method_names))
+    student_method_time_data.close()
+
     gnuplots = list()
 
-    plot = gnuplot.gnuplot_script("method_time.png")
+    plot = gnuplot.gnuplot_script("method_time", "png")
     plot.plot_box_and_whiskers("Time spend implementing methods",
         "Method names",
         "Time in seconds",
@@ -65,9 +77,10 @@ def main():
         [0, 9],
         [0, 500],
         45)
+    plot.add_student_line("student_method_time.data", student_name)
     gnuplots.append(plot)
 
-    plot = gnuplot.gnuplot_script("test_length.png")
+    plot = gnuplot.gnuplot_script("test_length", "png")
     plot.plot_box_and_whiskers("Length of time taken to complete test",
             None,
             "Time taken in minutes",
@@ -76,7 +89,7 @@ def main():
             [0, 45])
     gnuplots.append(plot)
 
-    plot = gnuplot.gnuplot_script("char_per_minute.png")
+    plot = gnuplot.gnuplot_script("char_per_minute", "png")
     plot.plot_box_and_whiskers("Characters per minute",
             None,
             "Characters per minute",
@@ -170,6 +183,16 @@ def process_results(results, attribute):
     trd_q = numpy.percentile(numpy.array(time_to_complete), 75)
 
     return [min_value, fst_q, median, trd_q, max_value]
+
+def format_individual_student(data, names):
+    gnuplot = "# Data columns: X Y\n"
+    i = 1
+    for value in names:
+        gnuplot += str(i) + " " + str(data[value]) + "\n"
+        i += 1
+
+    return gnuplot
+
 
 def format_gnuplot(data, names):
     gnuplot = "# Data columns: X Min 1stQuartile Median 3rdQuartile Max BoxWidth Titles\n"

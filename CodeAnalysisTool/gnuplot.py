@@ -2,13 +2,19 @@ import utils
 import os
 
 class gnuplot_script:
-    def __init__(self, output_file, script = None):
+    def __init__(self, output_file, output_type = "png", script = None):
         self.output_file = output_file
         self.script = script
+        self.output_type = output_type
 
     def plot_box_and_whiskers(self, title, xlabel, ylabel, data_file, xrange, yrange, xtic_rotation=0):
-        plot_script = "set terminal pngcairo transparent enhanced font \"arial,10\" fontscale 1.0 size 500, 350\n"
-        plot_script += "set output '" + self.output_file + "'\n"
+        plot_script = ""
+        if self.output_type == "svg":
+            plot_script += "set terminal svg enhanced font \"arial,10\" size 500, 350"
+        else: # defaults to png
+            plot_script += "set terminal pngcairo transparent enhanced font \"arial,10\" fontscale 1.0 size 500, 350\n"
+
+        plot_script += "set output '" + self.output_file + "." + self.output_type + "'\n"
         plot_script += "set boxwidth 0.2 absolute\n"
         plot_script += "set title \"" + title + "\"\n"
         plot_script += "set xrange[" + str(xrange[0]) + ":" + str(xrange[1]) + "]\n"
@@ -25,6 +31,10 @@ class gnuplot_script:
         plot_script += "set style fill empty\n"
         plot_script += "plot '" + data_file + "' using 1:3:2:6:5:7:xticlabels(8) with candlesticks notitle whiskerbars, '' using 1:4:4:4:4:7 with candlesticks lt -1 notitle"
         self.script = plot_script
+
+    def add_student_line(self, data_file, student_name):
+        self.script += ", \\\n"
+        self.script += "'" + data_file + "' using 1:2 w line title \"" + student_name + "\""
 
     def render(self):
         filename = "temp_" + self.output_file + ".gnuplot"
