@@ -316,6 +316,58 @@ Taking into account the time stamps for those snapshots we can determine how
 much time was spent mofifying a method.
 
 \subsection{Code Analysis Tool}
+The final tool that I have implemented I have unimaginatively named Code
+Analysis Tool. What it does is gives the instructor a user inferface to collect
+data from test submissions. The user of this tool provides a path to the
+directory of student test submissions and runs the analyses of their choosing.
+The output is graphed data so that the intructor may use this information to
+make choices about what their focus should be in classes. Examples of this are
+shown in figures \ref{fig:test_len}, \ref{fig:chars} and \ref{fig:method_time}.
+
+\begin{figure}[h!bt]
+\centering
+\includegraphics[width=\linewidth]{figures/test_length}
+\caption{Distribution of time taken to complete the test}
+\label{fig:test_len}
+\includegraphics[width=\linewidth]{figures/char_per_minute}
+\caption{Distribution of character per minute}
+\label{fig:chars}
+\end{figure}
+
+In figure \ref{fig:method_time} note how \texttt{isPalindrome} took on average
+the longest to implement by all the students. This side by side plot of method
+implementation times may help the instructor to determine which topics the
+class is struggling the most and he or she may be able to tailer the course
+content to compensate for that.
+
+\begin{figure}[h!bt]
+\includegraphics[width=\linewidth]{figures/method_time}
+\caption{Distribution of time spent implementing methods}
+\label{fig:method_time}
+\end{figure}
+
+Analysis of a single students performance is also possible. In figure
+\ref{fig:student1} a red line shows how a chosen student performed in
+comparison to the distribution. Note that this particular student accounts for
+the maximum in the distribution for implementing the method
+\texttt{isPalindrome}, this may be an indication to the intructor to talk to
+this student about course content covered by that particular method
+implementation.
+
+\begin{figure}[h!bt]
+\includegraphics[width=\linewidth]{figures/student1}
+\caption{Individual student shown in red}
+\label{fig:student1}
+\end{figure}
+
+It is also possible to compare two students. Shown in figure \ref{fig:student2}
+two students are being compared, one in greed the other in red.
+
+\begin{figure}[h!bt]
+\includegraphics[width=\linewidth]{figures/student2}
+\caption{Comparing two students one in green one in red}
+\label{fig:student2}
+\end{figure}
 
 \subsection{Open Source Tools}
 All the tools I have developed for this project are licensed under the GNU
@@ -332,27 +384,23 @@ and they are available here:
 
 
 \section{Evaluation}
-To evaluate the effectiveness of the tool, mock tests will be performed with
-volunteers to gather some test data. Some of the volunteers will be asked to
-copy one another and conceal it. These submissions will be used to evaluated the
-accuracy of plagiarism detection. It will also be a good opportunity to get user
-feedback and find out about potential bugs and problems before the tool is used
-in a more realistic setting.
+Unforunately due to time constraints and issues arising from implementation no
+evaluation has been performed. Evaluation is important for convincing an
+audience that it is a worthwhile investment. In the future it may be possible
+to distribute the tools that I have implement and field test them. Since all
+the tools are publicly available it may be possible for someone interested to
+use them in a real life setting.
+
+\section{Future Work}
+
 
 \section{Conclusions}
-Many student tests today to not assess students in a practical manner. The
-reason I think that pen and paper tests are popular is because lecturers are
-concerned that practical tests will give students an easy opportunity to
-plagiarise work.  The goal of Active Test Programmer (ATP) is to remove doubt
-from lecturers that plagiarism will be caught. ATP gives confidence to lecturers
-that attempts at concealing plagiarism will be found in the history of the
-students work. More over plagiarism detection is just one of the benefits of
-looking into the history of the code. In fact a more general analysis could give
-us information about where the student may have been struggling during the test
-by looking at how long it took a student took to implement a particular method
-or class. This information could be used to guide the lecturer on which topics
-to focus on in class and therefore give students a more effective learning
-experience.
+Since the focus of this project has changed from one interested in avoiding
+plagiarism to one that generalises the analyses that can be performed during
+practical programming tests. I think the tools I have implemented are a
+starting point that can be extended into a suite of testing analysis tools that
+can give course intructors insight into the performance of their students that
+was not possible with the classical pen and paper tests.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}

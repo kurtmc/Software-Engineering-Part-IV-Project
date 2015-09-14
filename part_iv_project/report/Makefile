@@ -1,5 +1,5 @@
 file_no_ext=report
-output_pdf=2015_Final_Report_Proj011_kmca733
+output_pdf=FinalReportGroup011_kmca733
 
 all:
 	cd figures/ast && $(MAKE)
