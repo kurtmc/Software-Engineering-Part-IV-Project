@@ -6,8 +6,11 @@ class gnuplot_script:
         self.output_file = output_file
         self.script = script
         self.output_type = output_type
+        self.data_files = list()
 
-    def plot_box_and_whiskers(self, title, xlabel, ylabel, data_file, xrange, yrange, xtic_rotation=0):
+    def plot_box_and_whiskers(self, title, xlabel, ylabel, data, xrange, yrange, xtic_rotation=0):
+        data_file = self.data_to_file(data)
+
         plot_script = ""
         if self.output_type == "svg":
             plot_script += "set terminal svg enhanced font \"arial,10\" size 500, 350"
@@ -32,7 +35,8 @@ class gnuplot_script:
         plot_script += "plot '" + data_file + "' using 1:3:2:6:5:7:xticlabels(8) with candlesticks notitle whiskerbars, '' using 1:4:4:4:4:7 with candlesticks lt -1 notitle"
         self.script = plot_script
 
-    def add_student_line(self, data_file, student_name):
+    def add_student_line(self, data, student_name):
+        data_file = self.data_to_file(data)
         self.script += ", \\\n"
         self.script += "'" + data_file + "' using 1:2 w line title \"" + student_name + "\""
 
@@ -44,3 +48,23 @@ class gnuplot_script:
 
         utils.run_command(["gnuplot", filename])
         os.remove(filename)
+
+    def cleanup_data_files(self):
+        for f in self.data_files:
+            os.remove(f)
+
+    def data_to_file(self, data):
+        filename = str(id(data)) + ".data"
+        contents = ""
+        for value in data:
+            value_as_string = [str(i) for i in value]
+            contents += " ".join(value_as_string) + "\n"
+
+        data_file = open(filename, "w")
+        data_file.write(contents)
+        data_file.close()
+
+        self.data_files.append(filename)
+
+        return filename
+

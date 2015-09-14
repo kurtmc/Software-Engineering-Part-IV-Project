@@ -34,38 +34,17 @@ def main():
     os.chdir(previous_dir)
 
     data = list()
-
-    data.append(process_results(results, "test_length"))
-
-    test_length_data = open("test_length.data", "w")
-    test_length_data.write(format_gnuplot(data, ["test_length"]))
-    test_length_data.close()
-
-    char_per_minute_data = open("char_per_minute.data", "w")
-    char_per_minute_data.write(format_gnuplot(data, ["char_per_minute"]))
-    char_per_minute_data.close()
-
-    data = list()
-
     method_names = ["factorial", "fibonacci", "min", "max", "reverse", "isPalindrome", "shuffle", "rotate"]
     for method in method_names:
         data.append(process_results(results, method))
 
-    method_time_data = open("method_time.data", "w")
-    method_time_data.write(format_gnuplot(data, method_names))
-    method_time_data.close()
-
     student_name = "kurt"
-    student_method_time_data = open("student_method_time.data", "w")
     student_result = None
     for v in results:
         if v["name"] == student_name:
             student_result = v
             break
 
-    student_method_time_data.write(format_individual_student(student_result,
-        method_names))
-    student_method_time_data.close()
 
     gnuplots = list()
 
@@ -73,18 +52,19 @@ def main():
     plot.plot_box_and_whiskers("Time spend implementing methods",
         "Method names",
         "Time in seconds",
-        "method_time.data",
+        format_gnuplot(data, method_names),
         [0, 9],
         [0, 500],
         45)
-    plot.add_student_line("student_method_time.data", student_name)
+    plot.add_student_line(format_individual_student(student_result,
+        method_names), student_name)
     gnuplots.append(plot)
 
     plot = gnuplot.gnuplot_script("test_length", "png")
     plot.plot_box_and_whiskers("Length of time taken to complete test",
             None,
             "Time taken in minutes",
-            "test_length.data",
+            format_gnuplot([process_results(results, "test_length")], ["test_length"]),
             [0, 2],
             [0, 45])
     gnuplots.append(plot)
@@ -93,17 +73,16 @@ def main():
     plot.plot_box_and_whiskers("Characters per minute",
             None,
             "Characters per minute",
-            "test_length.data",
+            format_gnuplot([process_results(results, "char_per_minute")], ["char_per_minute"]),
             [0, 2],
-            [0, 45])
+            [0, 200])
     gnuplots.append(plot)
 
     for p in gnuplots:
         p.render()
 
-    os.remove("test_length.data")
-    os.remove("char_per_minute.data")
-    os.remove("method_time.data")
+    for p in gnuplots:
+        p.cleanup_data_files()
 
     utils.run_command("convert -flatten char_per_minute.png char_per_minute_white.png".split())
     utils.run_command("convert -flatten method_time.png method_time_white.png".split())
@@ -172,7 +151,7 @@ def process_results(results, attribute):
 
     for student in results:
         if attribute in student.keys():
-            time_to_complete.append(student[attribute])
+            time_to_complete.append(int(student[attribute]))
         else:
             time_to_complete.append(0)
 
@@ -185,23 +164,29 @@ def process_results(results, attribute):
     return [min_value, fst_q, median, trd_q, max_value]
 
 def format_individual_student(data, names):
-    gnuplot = "# Data columns: X Y\n"
+    gnuplot = list()
     i = 1
     for value in names:
-        gnuplot += str(i) + " " + str(data[value]) + "\n"
+        row = list()
+        row.append(i)
+        row.append(data[value])
         i += 1
+        gnuplot.append(row)
 
     return gnuplot
 
 
 def format_gnuplot(data, names):
-    gnuplot = "# Data columns: X Min 1stQuartile Median 3rdQuartile Max BoxWidth Titles\n"
-    for i in range(len(data)):
-        gnuplot += str(i + 1) + " "
+    gnuplot = list()
+    for i in range(len(names)):
+        row = list()
+        row.append(i + 1)
         for value in data[i]:
-            gnuplot += str(value) + " "
-        gnuplot += "0.3"
-        gnuplot += " \"" + names[i].replace("_"," ") + "\"\n"
+            row.append(value)
+        row.append(0.3)
+        row.append('"' + names[i].replace("_"," ") + '"')
+
+        gnuplot.append(row)
 
     return gnuplot
     
