@@ -12,17 +12,43 @@ import json
 import gnuplot
 import utils
 import glob
+import tkinter
+from tkinter import filedialog
 
-def main():
-    if len(sys.argv) < 2:
-        print("Must provide a directory containing student tests")
-        sys.exit(1)
+class Application(tkinter.Frame):
+    def __init__(self, master, directory):
+        tkinter.Frame.__init__(self, master)
+        self.directory = directory
+        self.pack()
+        self.createWidgets()
 
-    tests_dir = sys.argv[1]
+    def createWidgets(self):
+        self.run = tkinter.Button(self)
+        self.run["text"] = "Run Analysis"
+        self.run["command"] = self.run_analysis
+        self.run.pack(side="top")
+
+        self.path_label = tkinter.Label(self)
+        self.path_label["text"] = "Path: " + str(self.directory)
+        self.path_label.pack(side="top")
+
+        self.choose_path = tkinter.Button(self)
+        self.choose_path["text"] = "Choose path"
+        self.choose_path["command"] = self.load_file
+        self.choose_path.pack(side="top")
+
+    def load_file(self):
+        self.directory = filedialog.askdirectory()
+
+    def run_analysis(self):
+        main(self.directory)
+
+def main(directory):
+    tests_dir = directory
 
     if not os.path.exists(tests_dir):
         print(tests_dir + " is not a valid directory")
-        sys.exit(1)
+        return
 
     previous_dir = os.getcwd()
 
@@ -84,13 +110,15 @@ def main():
     for p in gnuplots:
         p.cleanup_data_files()
 
-    utils.run_command("convert -flatten char_per_minute.png char_per_minute_white.png".split())
-    utils.run_command("convert -flatten method_time.png method_time_white.png".split())
-    utils.run_command("convert -flatten test_length.png test_length_white.png".split())
+    #utils.run_command("convert -flatten char_per_minute.png char_per_minute_white.png".split())
+    #utils.run_command("convert -flatten method_time.png method_time_white.png".split())
+    #utils.run_command("convert -flatten test_length.png test_length_white.png".split())
 
     utils.run_command(["mkdir", "-p", "graphs"])
     mv_images = ["mv"] + glob.glob("*.png") + ["graphs/"]
     utils.run_command(mv_images)
+
+
 
 def get_result_data(path, code_report_tool_path):
 
@@ -191,4 +219,10 @@ def format_gnuplot(data, names):
     return gnuplot
     
 if __name__ == '__main__':
-    main()
+    path = None
+    if len(sys.argv) > 1:
+        path = sys.argv[1]
+        main(path)
+    root = tkinter.Tk()
+    app = Application(root, path)
+    app.mainloop()

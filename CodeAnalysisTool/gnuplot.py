@@ -15,7 +15,7 @@ class gnuplot_script:
         if self.output_type == "svg":
             plot_script += "set terminal svg enhanced font \"arial,10\" size 500, 350"
         else: # defaults to png
-            plot_script += "set terminal pngcairo transparent enhanced font \"arial,10\" fontscale 1.0 size 500, 350\n"
+            plot_script += "set terminal pngcairo enhanced background rgb 'white' font \"arial,10\" fontscale 1.0 size 500, 350\n"
 
         plot_script += "set output '" + self.output_file + "." + self.output_type + "'\n"
         plot_script += "set boxwidth 0.2 absolute\n"
