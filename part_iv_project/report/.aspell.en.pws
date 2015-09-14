@@ -1,7 +1,9 @@
-personal_ws-1.1 en 27 
+personal_ws-1.1 en 30 
+isPalindrome
 morecomment
 framesep
 javapurple
+AST's
 JPlag
 ACP
 stringstyle
@@ -22,6 +24,7 @@ stepnumber
 workspace
 IEEEtran
 keywordstyle
+AST
 javared
 github
 libgit

@@ -199,7 +199,7 @@ our analysis.
 
 \subsection{Code Report Tool}
 
-Code Report Tool is a tool that I developed to attempt to simplfy extraction
+Code Report Tool is a tool that I developed to attempt to simplify extraction
 data from the students test submissions. It provide an interface for traversing
 history of a test submission and extracting certain data.\\
 
@@ -264,7 +264,7 @@ snapshot we can calculate the length of time spent working on the test. This
 measurement is more accurate than comparing the submission time to the start
 time as there are many factors that could delay the start of a test as well as
 delays which would cause the student submit the test after he or she has
-completed the test. Using the snapshots we can acturately determine precisely
+completed the test. Using the snapshots we can accurately determine precisely
 when they started modifying the test to when they stop modifying the test.
 
 Since we can calculate the length of time spent working on the test, we can
@@ -295,7 +295,7 @@ to \texttt{factorial}. And finally in figure \ref{fig:ast4} another variable
 \label{fig:ast1}
 \centering
 \includegraphics[width=\linewidth]{figures/ast/ast2}
-\caption{Variable declartion node added to method node}
+\caption{Variable declaration node added to method node}
 \label{fig:ast2}
 \centering
 \includegraphics[width=\linewidth]{figures/ast/ast3}
@@ -303,7 +303,7 @@ to \texttt{factorial}. And finally in figure \ref{fig:ast4} another variable
 \label{fig:ast3}
 \centering
 \includegraphics[width=\linewidth]{figures/ast/ast4}
-\caption{Variable declartion node added to method node}
+\caption{Variable declaration node added to method node}
 \label{fig:ast4}
 \end{figure}
 
@@ -313,14 +313,14 @@ time spend modifying each method. We can calculate the time spent modifying
 each method by building the AST for every possible snapshot and then comparing
 those AST's in chronological order to see which nodes have been modified.
 Taking into account the time stamps for those snapshots we can determine how
-much time was spent mofifying a method.
+much time was spent modifying a method.
 
 \subsection{Code Analysis Tool}
 The final tool that I have implemented I have unimaginatively named Code
-Analysis Tool. What it does is gives the instructor a user inferface to collect
+Analysis Tool. What it does is gives the instructor a user interface to collect
 data from test submissions. The user of this tool provides a path to the
 directory of student test submissions and runs the analyses of their choosing.
-The output is graphed data so that the intructor may use this information to
+The output is graphed data so that the instructor may use this information to
 make choices about what their focus should be in classes. Examples of this are
 shown in figures \ref{fig:test_len}, \ref{fig:chars} and \ref{fig:method_time}.
 
@@ -337,7 +337,7 @@ shown in figures \ref{fig:test_len}, \ref{fig:chars} and \ref{fig:method_time}.
 In figure \ref{fig:method_time} note how \texttt{isPalindrome} took on average
 the longest to implement by all the students. This side by side plot of method
 implementation times may help the instructor to determine which topics the
-class is struggling the most and he or she may be able to tailer the course
+class is struggling the most and he or she may be able to tailor the course
 content to compensate for that.
 
 \begin{figure}[h!bt]
@@ -350,7 +350,7 @@ Analysis of a single students performance is also possible. In figure
 \ref{fig:student1} a red line shows how a chosen student performed in
 comparison to the distribution. Note that this particular student accounts for
 the maximum in the distribution for implementing the method
-\texttt{isPalindrome}, this may be an indication to the intructor to talk to
+\texttt{isPalindrome}, this may be an indication to the instructor to talk to
 this student about course content covered by that particular method
 implementation.
 
@@ -384,7 +384,7 @@ and they are available here:
 
 
 \section{Evaluation}
-Unforunately due to time constraints and issues arising from implementation no
+Unfortunately due to time constraints and issues arising from implementation no
 evaluation has been performed. Evaluation is important for convincing an
 audience that it is a worthwhile investment. In the future it may be possible
 to distribute the tools that I have implement and field test them. Since all
@@ -392,6 +392,21 @@ the tools are publicly available it may be possible for someone interested to
 use them in a real life setting.
 
 \section{Future Work}
+Given more time and more development resources I would like to have seen more
+things implemented. One useful tool that should have been implemented is a web
+service that allows students to be delivered the test within the IDE, and once
+the test is completed submit the test from within the IDE. This web service
+would also allow the instructor to download all the tests and perform the
+analyses of his or her choosing.
+
+Furthermore I would like to have implemented plugins not only for Eclipse.
+Eclipse is not the only IDE used for Java development and it would be silly to
+claim realistic testing environments when we have to restrict which IDE
+students may use. Eclipse is also a major limitation as whilst working on this
+project Eclipse released a new version of their IDE which makes changed to the
+plugin architecture which breaks the plugin I have developed. So currently the
+only version of Eclipse that can be used with my plugin is Eclipse Luna and not
+Eclipse Mars.
 
 
 \section{Conclusions}
@@ -399,7 +414,7 @@ Since the focus of this project has changed from one interested in avoiding
 plagiarism to one that generalises the analyses that can be performed during
 practical programming tests. I think the tools I have implemented are a
 starting point that can be extended into a suite of testing analysis tools that
-can give course intructors insight into the performance of their students that
+can give course instructors insight into the performance of their students that
 was not possible with the classical pen and paper tests.
 
 \bibliographystyle{IEEEtran}
