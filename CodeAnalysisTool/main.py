@@ -55,15 +55,24 @@ def main():
     method_time_data.write(format_gnuplot(data, method_names))
     method_time_data.close()
 
-    gnuplot.plot_box_and_whiskers("Time spend implementing methods",
-            "Method names", "Time in seconds", "method_time.data",
-            "method_time.png", [0, 9], [0, 500], 45)
-    gnuplot.plot_box_and_whiskers("Length of time taken to complete test",
+    gnuplots = list()
+    plot = gnuplot.gnuplot_script("method_time.png")
+    plot.plot_box_and_whiskers("Time spend implementing methods", "Method names", "Time in seconds", "method_time.data", [0, 9], [0, 500], 45)
+    gnuplots.append(plot)
+
+    plot = gnuplot.gnuplot_script("test_length.png")
+    plot.plot_box_and_whiskers("Length of time taken to complete test",
             None, "Time taken in minutes", "test_length.data",
-            "test_length.png", [0, 2], [0, 45])
-    gnuplot.plot_box_and_whiskers("Characters per minute", None,
-            "Characters per minute", "test_length.data", "char_per_minute.png",
             [0, 2], [0, 45])
+    gnuplots.append(plot)
+
+    plot = gnuplot.gnuplot_script("char_per_minute.png")
+    plot.plot_box_and_whiskers("Characters per minute", None,
+            "Characters per minute", "test_length.data", [0, 2], [0, 45])
+    gnuplots.append(plot)
+
+    for p in gnuplots:
+        p.render()
 
     os.remove("test_length.data")
     os.remove("char_per_minute.data")
