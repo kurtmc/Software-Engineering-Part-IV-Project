@@ -39,23 +39,34 @@ class Application(tkinter.Frame):
         self.choose_path["command"] = self.load_file
         self.choose_path.pack(side="top")
 
+        self.student_name_label = tkinter.Label(self, text = "Student name:")
+        self.student_name_label.pack(side="top")
+
+        self.student_name = tkinter.Entry(self)
+        self.student_name.pack(side="top")
+
         self.image = None
         self.image_canvas = tkinter.Canvas(self, width=500, height=500)
         self.image_canvas.pack(side="top")
+
 
     def load_file(self):
         self.directory = filedialog.askdirectory()
         self.path_label["text"] = "Path: " + str(self.directory)
 
     def run_analysis(self):
-        main(self.directory)
+        student_name = self.student_name.get()
+        if not student_name:
+            main(self.directory)
+        else:
+            main(self.directory, student_name)
         im = Image.open("graphs/method_time.png")
         self.image = ImageTk.PhotoImage(im)
         self.image_canvas.create_image(250, 250, image=self.image)
         #self.image_canvas.pack(side="top")
 
 
-def main(directory):
+def main(directory, student_name=None):
     tests_dir = directory
 
     if not os.path.exists(tests_dir):
@@ -76,7 +87,6 @@ def main(directory):
     for method in method_names:
         data.append(process_results(results, method))
 
-    student_name = "kurt"
     student_result = None
     for v in results:
         if v["name"] == student_name:
@@ -94,8 +104,8 @@ def main(directory):
         [0, 9],
         [0, 500],
         45)
-    plot.add_student_line(format_individual_student(student_result,
-        method_names), student_name)
+    if student_name is not None:
+        plot.add_student_line(format_individual_student(student_result, method_names), student_name)
     gnuplots.append(plot)
 
     plot = gnuplot.gnuplot_script("test_length", "png")
