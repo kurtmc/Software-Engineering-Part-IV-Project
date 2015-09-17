@@ -14,6 +14,8 @@ import utils
 import glob
 import tkinter
 from tkinter import filedialog
+from PIL import Image, ImageTk
+import time
 
 class Application(tkinter.Frame):
     def __init__(self, master, directory):
@@ -37,11 +39,21 @@ class Application(tkinter.Frame):
         self.choose_path["command"] = self.load_file
         self.choose_path.pack(side="top")
 
+        self.image = None
+        self.image_canvas = tkinter.Canvas(self, width=500, height=500)
+        self.image_canvas.pack(side="top")
+
     def load_file(self):
         self.directory = filedialog.askdirectory()
+        self.path_label["text"] = "Path: " + str(self.directory)
 
     def run_analysis(self):
         main(self.directory)
+        im = Image.open("graphs/method_time.png")
+        self.image = ImageTk.PhotoImage(im)
+        self.image_canvas.create_image(250, 250, image=self.image)
+        #self.image_canvas.pack(side="top")
+
 
 def main(directory):
     tests_dir = directory
