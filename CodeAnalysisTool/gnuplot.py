@@ -50,8 +50,12 @@ class gnuplot_script:
         os.remove(filename)
 
     def cleanup_data_files(self):
-        for f in self.data_files:
-            os.remove(f)
+        try:
+            for f in self.data_files:
+                os.remove(f)
+        except FileNotFoundError:
+            pass
+        self.data_files = list()
 
     def data_to_file(self, data):
         filename = str(id(data)) + ".data"

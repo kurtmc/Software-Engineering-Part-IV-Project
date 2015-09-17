@@ -104,7 +104,7 @@ def main(directory, student_name=None):
         [0, 9],
         [0, 500],
         45)
-    if student_name is not None:
+    if student_name is not None and student_result is not None:
         plot.add_student_line(format_individual_student(student_result, method_names), student_name)
     gnuplots.append(plot)
 
