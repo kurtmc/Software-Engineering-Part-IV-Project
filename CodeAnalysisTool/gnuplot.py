@@ -1,5 +1,7 @@
 import utils
 import os
+import random
+import string
 
 class gnuplot_script:
     def __init__(self, output_file, output_type = "png", script = None):
@@ -50,15 +52,21 @@ class gnuplot_script:
         os.remove(filename)
 
     def cleanup_data_files(self):
-        try:
-            for f in self.data_files:
+        to_remove = list()
+        for f in self.data_files:
+            try:
                 os.remove(f)
-        except FileNotFoundError:
-            pass
-        self.data_files = list()
+                to_remove.append(f)
+            except FileNotFoundError:
+                pass
+        for f in to_remove:
+            self.data_files.remove(f)
+
+    def get_random_string(self, n):
+        return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(n))
 
     def data_to_file(self, data):
-        filename = str(id(data)) + ".data"
+        filename = self.get_random_string(12) + ".data"
         contents = ""
         for value in data:
             value_as_string = [str(i) for i in value]

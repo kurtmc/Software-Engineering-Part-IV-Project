@@ -131,7 +131,7 @@ def main(directory, student_name=None):
 
     for p in gnuplots:
         p.cleanup_data_files()
-
+    
     #utils.run_command("convert -flatten char_per_minute.png char_per_minute_white.png".split())
     #utils.run_command("convert -flatten method_time.png method_time_white.png".split())
     #utils.run_command("convert -flatten test_length.png test_length_white.png".split())
