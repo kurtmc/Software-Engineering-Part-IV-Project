@@ -4,3 +4,4 @@ bin/
 .directory
 *.png
 __pycache__
+*.pyc

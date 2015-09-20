@@ -219,7 +219,10 @@ def format_individual_student(data, names):
     for value in names:
         row = list()
         row.append(i)
-        row.append(data[value])
+        if value in data:
+            row.append(data[value])
+        else:
+            row.append(0)
         i += 1
         gnuplot.append(row)
 
