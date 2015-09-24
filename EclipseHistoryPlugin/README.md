@@ -1,5 +1,8 @@
-# Getting started with developement
-You need to install some components to develope eclipse plugins.
+Getting started with developement
+=================================
+You need to install some components to develop eclipse plugins.
+
+This plugin is know only to work with Eclipse Luna.
 
 The first thing you need is Eclipse PDE (Plug-in Development Environment) which
 can be installed from the eclipse market place. The second component needed is
