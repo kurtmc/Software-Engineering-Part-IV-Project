@@ -1,3 +1,5 @@
+This plugin allows teachers to record the history of a practical test being taken with the Eclipse IDE. Once the student has completed the test the history can be analysed.
+
 Getting started with developement
 =================================
 You need to install some components to develop eclipse plugins.
